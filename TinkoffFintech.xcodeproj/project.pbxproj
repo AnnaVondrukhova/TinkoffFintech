@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C1CD1DB6250C02CC00568705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1DB5250C02CC00568705 /* AppDelegate.swift */; };
-		C1CD1DB8250C02CC00568705 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1DB7250C02CC00568705 /* SceneDelegate.swift */; };
 		C1CD1DBA250C02CC00568705 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1DB9250C02CC00568705 /* ViewController.swift */; };
 		C1CD1DBD250C02CC00568705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1CD1DBB250C02CC00568705 /* Main.storyboard */; };
 		C1CD1DBF250C02CF00568705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1CD1DBE250C02CF00568705 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		C1CD1DB2250C02CC00568705 /* TinkoffFintech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffFintech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CD1DB5250C02CC00568705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C1CD1DB7250C02CC00568705 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C1CD1DB9250C02CC00568705 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C1CD1DBC250C02CC00568705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1CD1DBE250C02CF00568705 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				C1CD1DB5250C02CC00568705 /* AppDelegate.swift */,
-				C1CD1DB7250C02CC00568705 /* SceneDelegate.swift */,
 				C1CD1DB9250C02CC00568705 /* ViewController.swift */,
 				C1CD1DBB250C02CC00568705 /* Main.storyboard */,
 				C1CD1DBE250C02CF00568705 /* Assets.xcassets */,
@@ -140,7 +137,6 @@
 			files = (
 				C1CD1DBA250C02CC00568705 /* ViewController.swift in Sources */,
 				C1CD1DB6250C02CC00568705 /* AppDelegate.swift in Sources */,
-				C1CD1DB8250C02CC00568705 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -294,7 +290,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = anna.vondrukhova.TinkoffFintech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,7 +308,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = anna.vondrukhova.TinkoffFintech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
