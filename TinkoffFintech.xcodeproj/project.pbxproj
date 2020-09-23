@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
+		C196961525194A320077BDE8 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C196961425194A320077BDE8 /* Roboto-Regular.ttf */; };
+		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C1CD1DB6250C02CC00568705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1DB5250C02CC00568705 /* AppDelegate.swift */; };
 		C1CD1DBA250C02CC00568705 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1DB9250C02CC00568705 /* ViewController.swift */; };
 		C1CD1DBD250C02CC00568705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1CD1DBB250C02CC00568705 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C196961425194A320077BDE8 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C1CD1DB2250C02CC00568705 /* TinkoffFintech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffFintech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CD1DB5250C02CC00568705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1CD1DB9250C02CC00568705 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +41,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C196961625194F050077BDE8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C196961425194A320077BDE8 /* Roboto-Regular.ttf */,
+				C1CD1DBE250C02CF00568705 /* Assets.xcassets */,
+				C1CD1DC3250C02CF00568705 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C19696172519CA320077BDE8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C1CD1DB5250C02CC00568705 /* AppDelegate.swift */,
+				C1CD1DB9250C02CC00568705 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C19696182519CA3D0077BDE8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C1CD1DBB250C02CC00568705 /* Main.storyboard */,
+				C1CD1DC0250C02CF00568705 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C19696192519CA450077BDE8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C1969612251947E30077BDE8 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C196961A2519CA810077BDE8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C196961B2519CA970077BDE8 /* AlertService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C1CD1DA9250C02CC00568705 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +104,11 @@
 		C1CD1DB4250C02CC00568705 /* TinkoffFintech */ = {
 			isa = PBXGroup;
 			children = (
-				C1CD1DB5250C02CC00568705 /* AppDelegate.swift */,
-				C1CD1DB9250C02CC00568705 /* ViewController.swift */,
-				C1CD1DBB250C02CC00568705 /* Main.storyboard */,
-				C1CD1DBE250C02CF00568705 /* Assets.xcassets */,
-				C1CD1DC0250C02CF00568705 /* LaunchScreen.storyboard */,
-				C1CD1DC3250C02CF00568705 /* Info.plist */,
+				C19696192519CA450077BDE8 /* Model */,
+				C19696182519CA3D0077BDE8 /* View */,
+				C19696172519CA320077BDE8 /* Controller */,
+				C196961A2519CA810077BDE8 /* Services */,
+				C196961625194F050077BDE8 /* Resources */,
 			);
 			path = TinkoffFintech;
 			sourceTree = "<group>";
@@ -124,6 +173,7 @@
 			files = (
 				C1CD1DC2250C02CF00568705 /* LaunchScreen.storyboard in Resources */,
 				C1CD1DBF250C02CF00568705 /* Assets.xcassets in Resources */,
+				C196961525194A320077BDE8 /* Roboto-Regular.ttf in Resources */,
 				C1CD1DBD250C02CC00568705 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +187,8 @@
 			files = (
 				C1CD1DBA250C02CC00568705 /* ViewController.swift in Sources */,
 				C1CD1DB6250C02CC00568705 /* AppDelegate.swift in Sources */,
+				C196961C2519CA970077BDE8 /* AlertService.swift in Sources */,
+				C1969613251947E30077BDE8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +334,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LV8EDW43XJ;
-				INFOPLIST_FILE = TinkoffFintech/Info.plist;
+				INFOPLIST_FILE = TinkoffFintech/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LV8EDW43XJ;
-				INFOPLIST_FILE = TinkoffFintech/Info.plist;
+				INFOPLIST_FILE = TinkoffFintech/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
