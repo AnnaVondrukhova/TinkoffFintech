@@ -71,5 +71,4 @@ class AvatarView: UIView {
             initialsLabel.isHidden = true
         }
     }
-    
 }
