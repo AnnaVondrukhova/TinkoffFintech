@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
-class AlertService {
-    static func showAlert(in vc: UIViewController, message: String) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        
-        alertController.addAction(okAction)
-        vc.present(alertController, animated: true, completion: nil)
+protocol AlertPresentable {
+    func showAlert(title: String?, message: String?, preferredStyle: UIAlertController.Style, actions: [UIAlertAction], completion: (() -> Void)?)
+}
+
+extension AlertPresentable where Self: UIViewController {
+    func showAlert(title: String?, message: String?, preferredStyle: UIAlertController.Style, actions: [UIAlertAction], completion: (() -> Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        actions.forEach { alertController.addAction($0) }
+        present(alertController, animated: true, completion: completion)
     }
 }
