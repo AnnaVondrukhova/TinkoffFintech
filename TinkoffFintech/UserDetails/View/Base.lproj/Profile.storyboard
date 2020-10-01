@@ -79,7 +79,7 @@ Location</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="My Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKF-Ec-oNz">
-                                        <rect key="frame" x="16" y="33" width="150" height="30"/>
+                                        <rect key="frame" x="16" y="33" width="287" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Jgh-fs-ohq"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="iJl-fj-4WY"/>
@@ -89,7 +89,7 @@ Location</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jaf-Q7-dY5">
-                                        <rect key="frame" x="10" y="33" width="348" height="30"/>
+                                        <rect key="frame" x="313" y="33" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ZMS-Am-CRi"/>
                                         </constraints>
@@ -104,7 +104,7 @@ Location</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Jaf-Q7-dY5" secondAttribute="trailing" constant="17" id="HJf-Yq-Ech"/>
                                     <constraint firstItem="dKF-Ec-oNz" firstAttribute="leading" secondItem="cdt-kz-nYa" secondAttribute="leading" constant="16" id="Pv2-82-0sk"/>
-                                    <constraint firstItem="Jaf-Q7-dY5" firstAttribute="leading" secondItem="cdt-kz-nYa" secondAttribute="leading" constant="10" id="aKs-yC-Hhb"/>
+                                    <constraint firstItem="Jaf-Q7-dY5" firstAttribute="leading" secondItem="dKF-Ec-oNz" secondAttribute="trailing" constant="10" id="aKs-yC-Hhb"/>
                                     <constraint firstAttribute="height" constant="96" id="lle-lP-4GI"/>
                                     <constraint firstItem="dKF-Ec-oNz" firstAttribute="centerY" secondItem="cdt-kz-nYa" secondAttribute="centerY" id="wcG-gR-hei"/>
                                     <constraint firstItem="Jaf-Q7-dY5" firstAttribute="centerY" secondItem="cdt-kz-nYa" secondAttribute="centerY" id="yH8-Am-JnZ"/>
