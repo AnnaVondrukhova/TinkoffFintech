@@ -32,17 +32,23 @@ class ConversationViewController: UIViewController {
         
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.backgroundView = setUpBackgroundLabel()
+    }
 
 }
 
 extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if messages.isEmpty {
-            tableView.backgroundView = setUpBackgroundLabel()
+            tableView.backgroundView?.isHidden = false
             tableView.separatorStyle = .none
             return 0
         } else {
-            tableView.backgroundView = nil
+            tableView.backgroundView?.isHidden = true
             return messages.count
         }
         
