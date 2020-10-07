@@ -13,6 +13,7 @@ class ConversationViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     var conversation: Conversation?
     private var messages = [Message]()
+    var currentTheme = ThemeManager.currentTheme
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +34,17 @@ class ConversationViewController: UIViewController {
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        currentTheme = ThemeManager.currentTheme
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         tableView.backgroundView = setUpBackgroundLabel()
+        self.view.backgroundColor = currentTheme.colors.backgroundColor
     }
 
 }
@@ -73,7 +81,7 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
         let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         backgroundLabel.text = "No messages"
         backgroundLabel.font = .systemFont(ofSize: 27, weight: .semibold)
-        backgroundLabel.textColor = .lightGray
+        backgroundLabel.textColor = currentTheme.colors.secondaryFontColor
         backgroundLabel.textAlignment = .center
         backgroundLabel.transform = CGAffineTransform(scaleX: 1, y: -1)
         return backgroundLabel

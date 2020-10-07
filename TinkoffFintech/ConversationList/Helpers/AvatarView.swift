@@ -21,6 +21,7 @@ class AvatarView: UIView {
     let initialsLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

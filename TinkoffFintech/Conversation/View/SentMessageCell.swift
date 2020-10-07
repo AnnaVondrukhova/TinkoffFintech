@@ -12,7 +12,6 @@ class SentMessageCell: UITableViewCell, ConfigurableView {
 
     let messageView: UIView = {
         let view = UIView()
-        view.backgroundColor = Constants.sentMessageViewColor
         view.layer.cornerRadius = 8
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -55,6 +54,12 @@ class SentMessageCell: UITableViewCell, ConfigurableView {
     }
     
     func configure(with model: MessageCellModel) {
+        let currentTheme = ThemeManager.currentTheme
+        
+        contentView.backgroundColor = currentTheme.colors.backgroundColor
+        messageView.backgroundColor = currentTheme.colors.sentMessageViewColor
+        
+        messageLabel.textColor = currentTheme.colors.sentMessageFontColor
         messageLabel.text = model.text
     }
 

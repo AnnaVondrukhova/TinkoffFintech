@@ -39,7 +39,6 @@ class ConversationCell: UITableViewCell, ConfigurableView {
     let messageLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textColor = .lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,7 +46,6 @@ class ConversationCell: UITableViewCell, ConfigurableView {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = .lightGray
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,13 +72,20 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         avatarView.layer.cornerRadius = avatarView.frame.height/2
     }
     
-    func configure(with model: ConversationCellModel) {
+    func setUpAppearance(with model: ConversationCellModel, theme: Theme) {
         if model.isOnline {
-            bgView.backgroundColor = Constants.onlineConversationCellBackgroundColor
+            bgView.backgroundColor = theme.colors.onlineConversationColor
         } else {
-            bgView.backgroundColor = .white
+            bgView.backgroundColor = theme.colors.backgroundColor
         }
-
+        
+        nameLabel.textColor = theme.colors.baseFontColor
+        dateLabel.textColor = theme.colors.secondaryFontColor
+        messageLabel.textColor = theme.colors.secondaryFontColor
+    }
+    
+    func configure(with model: ConversationCellModel) {
+    
         avatarView.configure(name: model.name, fontSize: Constants.contactAvatarFontSize, cornerRadius: avatarView.layer.cornerRadius)
         nameLabel.text = model.name
         
@@ -94,9 +99,7 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         messageLabel.text = model.message.isEmpty ? "No messages yet" : model.message
         if model.message.isEmpty {
             messageLabel.font = UIFont.italicSystemFont(ofSize: 13)
-            messageLabel.textColor = .lightGray
         } else {
-            messageLabel.textColor = .darkGray
             if model.hasUnreadMessages {
                 messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
             } else {

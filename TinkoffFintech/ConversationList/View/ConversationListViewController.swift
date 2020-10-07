@@ -13,22 +13,33 @@ enum Sections: Int, CaseIterable {
     case history
 }
 
-class ConversationListViewController: UIViewController {
-
+class ConversationListViewController: UIViewController, ThemesPickerDelegate {
+    
     @IBOutlet var tableView: UITableView!
     
     private var onlineConversations = [Conversation]()
     private var historyConversations = [Conversation]()
     
+    var updateAppearanceClosure: ((Theme) -> ())? = nil
+    var currentTheme = ThemeManager.currentTheme {
+        didSet {
+            updateAppearance(theme: currentTheme)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
-
         onlineConversations = TestData().conversations.filter({ $0.isOnline == true})
         historyConversations = TestData().conversations.filter({ ($0.isOnline == false)&&(!$0.messages.isEmpty)})
         
+        self.updateAppearanceClosure = { [weak self] theme in
+            self?.currentTheme = theme
+        }
+        
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
         tableView.reloadData()
     }
     
@@ -57,8 +68,27 @@ class ConversationListViewController: UIViewController {
         
         let rightBarButton = UIBarButtonItem(customView: userButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        self.navigationItem.leftBarButtonItem?.image = UIImage(named: "settings")
     }
-
+    
+    func updateAppearance(theme: Theme) {
+        ThemeManager.applyTheme(theme: theme)
+        ThemeManager.updateWindows()
+        tableView.reloadData()
+    }
+    
+    @IBAction func leftBarButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Themes", bundle: nil)
+        guard let themesVC = storyboard.instantiateViewController(withIdentifier: "themesVC") as? ThemesViewController else { return }
+        
+        themesVC.delegate = self
+        if let closure = updateAppearanceClosure {
+            themesVC.setThemeClosure = closure
+        }
+        navigationController?.pushViewController(themesVC, animated: true)
+    }
+    
     @objc func rightBarButtonPressed() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         guard let userDetailsVC = storyboard.instantiateViewController(withIdentifier: "profileVC") as? ProfileViewController else { return }
@@ -93,6 +123,8 @@ extension ConversationListViewController: UITableViewDelegate, UITableViewDataSo
         case .history:
             model = ConversationViewModelFactory.createViewModel(with: historyConversations[indexPath.row])
         }
+
+        cell.setUpAppearance(with: model, theme: currentTheme)
         cell.configure(with: model)
         
         return cell

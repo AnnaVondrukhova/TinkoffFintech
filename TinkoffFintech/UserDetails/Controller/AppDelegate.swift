@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.inactive)", "\(UIApplicationState.inactive)", "\(#function)")
+        
+        ThemeManager.applyTheme(theme: ThemeManager.currentTheme)
         return true
     }
     
@@ -56,6 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         os_log("Application moved from %s/$s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.background)", "\(UIApplicationState.suspended)", "\(UIApplicationState.notRunning)", "\(#function)")
+    }
+    
+    func changeStatusBar(theme: Theme) {
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = theme.colors.userInterfaceStyle
+        } 
     }
 
 }
