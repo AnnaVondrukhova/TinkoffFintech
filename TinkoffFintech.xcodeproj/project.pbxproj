@@ -222,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				C19A384D2527378E00642E58 /* Model */,
-				C19A3850252738C000642E58 /* ViewModel */,
+				C19A3850252738C000642E58 /* Manager */,
 				C19A38482527366700642E58 /* VIew */,
 			);
 			path = Themes;
@@ -245,12 +245,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C19A3850252738C000642E58 /* ViewModel */ = {
+		C19A3850252738C000642E58 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				C19A3851252738E200642E58 /* ThemeManager.swift */,
 			);
-			path = ViewModel;
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		C1CD1DA9250C02CC00568705 = {
