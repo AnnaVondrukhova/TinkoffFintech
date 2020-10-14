@@ -48,7 +48,7 @@ struct Constants {
                                  userInterfaceStyle: .light,
                                  barStyle: .default)
     static let nightTheme = Colors(backgroundColor: UIColor(red: 0.02, green: 0.02, blue: 0.02, alpha: 1.00),
-                                   onlineConversationColor: UIColor(red: 0.83, green: 0.83, blue: 0.72, alpha: 1.00),
+                                   onlineConversationColor: UIColor(red: 0.28, green: 0.29, blue: 0.22, alpha: 1.00),
                                    sentMessageViewColor: UIColor(red: 0.36, green: 0.36, blue: 0.36, alpha: 1.00),
                                    receivedMessageViewColor: UIColor(red: 0.18, green: 0.18, blue: 0.18, alpha: 1.00),
                                    sentMessageFontColor: UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00),
@@ -59,5 +59,9 @@ struct Constants {
                                    secondaryFontColor: UIColor(red: 0.55, green: 0.55, blue: 0.58, alpha: 1.00),
                                    userInterfaceStyle: .dark,
                                    barStyle: .black)
-    
+    //file names
+    static let nameFileName = "name.txt"
+    static let descriptionFileName = "description.txt"
+    static let photoFileName = "photo.txt"
+    static let themeFileName = "theme.txt"
 }

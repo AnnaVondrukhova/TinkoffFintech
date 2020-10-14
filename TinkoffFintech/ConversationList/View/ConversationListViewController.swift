@@ -27,6 +27,9 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
         }
     }
     
+    var user = User()
+    var saveDataManager: SaveDataManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +42,22 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
             self?.currentTheme = theme
         }
         
+        //загрузка данных через GCD
+        saveDataManager = GCDDataManager()
+                
+        //загрузка данных через Operation
+//        saveDataManager = OperationDataManager()
+        
+        saveDataManager.loadData { (name, _, photo) in
+            DispatchQueue.main.async {
+                self.user.name = name ?? "No name"
+                self.user.photo = photo
+                
+                self.configureNavigationElements()
+            }
+        }
+        
+        currentTheme = ThemeManager.currentTheme
         tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
         tableView.reloadData()
     }
@@ -60,7 +79,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
         let userAvatarView = AvatarView(frame: userButton.frame)
         userAvatarView.backgroundColor = Constants.userPhotoBackgrounColor
         userAvatarView.layer.cornerRadius = userAvatarView.frame.width/2
-        userAvatarView.configure(image: User.testUser.photo, name: User.testUser.name, fontSize: Constants.navigationBarAvatarFontSize, cornerRadius: userAvatarView.frame.width/2)
+        userAvatarView.configure(image: user.photo, name: user.name, fontSize: Constants.navigationBarAvatarFontSize, cornerRadius: userAvatarView.frame.width/2)
         userAvatarView.isUserInteractionEnabled = true
         userAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightBarButtonPressed)))
         
@@ -92,6 +111,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
     @objc func rightBarButtonPressed() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         guard let userDetailsVC = storyboard.instantiateViewController(withIdentifier: "profileVC") as? ProfileViewController else { return }
+        userDetailsVC.delegate = self
         
         present(userDetailsVC, animated: true, completion: nil)
     }
