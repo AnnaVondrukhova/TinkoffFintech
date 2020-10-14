@@ -351,7 +351,6 @@ class ProfileViewController: UIViewController, AlertPresentable {
             self.showAlert(title: "Data saved", message: nil, preferredStyle: .alert, actions: [okAction], completion: nil)
         } else {
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                self.backgroundView.isUserInteractionEnabled = true
                 self.saveWithGCDButton.setTitleColor(.systemBlue, for: .normal)
                 self.saveWithGCDButton.isEnabled = true
                 self.saveWithOperationButton.setTitleColor(.systemBlue, for: .normal)
@@ -364,6 +363,7 @@ class ProfileViewController: UIViewController, AlertPresentable {
             let message = fails.joined(separator: ", ")
             self.showAlert(title: "Error", message: "Failed to save \(message)", preferredStyle: .alert, actions: [okAction, repeatAction], completion: nil)
         }
+        self.backgroundView.isUserInteractionEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
