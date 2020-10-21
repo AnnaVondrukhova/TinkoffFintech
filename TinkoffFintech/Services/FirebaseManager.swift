@@ -13,7 +13,6 @@ class FirebaseManager {
     private let db = Firestore.firestore()
     
     func getChannels(completion: @escaping ([Channel], [Channel], [String]) -> Void) {
-        print("***Listened")
         let reference = db.collection("channels")
         
         
@@ -111,7 +110,6 @@ class FirebaseManager {
         let firebaseQueue = DispatchQueue.global()
         firebaseQueue.async {
             reference.addDocument(data: messageData) { error in
-                print("***Error!")
                 DispatchQueue.main.async {
                     completion(error)
                 }
