@@ -19,7 +19,7 @@ class ThemesViewController: UIViewController {
     @IBOutlet var labels: [UILabel]!
     
     var delegate: ThemesPickerDelegate?
-    var setThemeClosure: ((Theme) -> ())? = nil
+    var setThemeClosure: ((Theme) -> Void)?
     var selectedTheme = ThemeManager.currentTheme
         
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class ThemesViewController: UIViewController {
     func setUpButtonsAndLabels() {
         buttons.forEach { (button) in
             button.layer.cornerRadius = 14.0
-            button.layer.masksToBounds  = true
+            button.layer.masksToBounds = true
             button.addTarget(self, action: #selector(setObjectSelected(_:)), for: .touchUpInside)
         }
         
@@ -99,7 +99,10 @@ class ThemesViewController: UIViewController {
 //        delegate?.currentTheme = theme
                 
         //обновление ConversationListViewController через замыкание
-        //мог бы возникнуть retain cycle ConversationListViewController -> ThemesViewController -> setThemeClosure -> ConversationListViewController, но в ConversationListViewController ссылка на ThemesViewController создается в методе leftBarButtonPressed, а не как переменная класса, так что цикла возникнуть не должно. Еще в самом ConversationListViewController мог бы за счет использования self возникнуть цикл ViewController -> updateAppearanceClosure -> ViewController, но в замыкании используется [weak self], так что этого не случится.
+        //мог бы возникнуть retain cycle ConversationListViewController -> ThemesViewController -> setThemeClosure -> ConversationListViewController,
+        //но в ConversationListViewController ссылка на ThemesViewController создается в методе leftBarButtonPressed, а не как переменная класса, так что цикла возникнуть не должно
+        //Еще в самом ConversationListViewController мог бы за счет использования self возникнуть цикл ViewController -> updateAppearanceClosure -> ViewController,
+        //но в замыкании используется [weak self], так что этого не случится.
         if let closure = setThemeClosure {
             closure(theme)
         }
@@ -115,4 +118,3 @@ class ThemesViewController: UIViewController {
         button.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1.00).cgColor
     }
 }
-

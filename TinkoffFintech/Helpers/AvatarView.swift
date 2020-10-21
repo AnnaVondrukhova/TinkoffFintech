@@ -53,8 +53,7 @@ class AvatarView: UIView {
         initialsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
     
-    
-    func configure(image: UIImage? = nil, name: String? = nil, fontSize: CGFloat = 0, cornerRadius: CGFloat =  0) {
+    func configure(image: UIImage? = nil, name: String? = nil, fontSize: CGFloat = 0, cornerRadius: CGFloat = 0) {
         imageView.layer.cornerRadius = cornerRadius
         
         if let image = image {
@@ -64,7 +63,7 @@ class AvatarView: UIView {
         } else if let name = name, !name.isEmpty {
             imageView.isHidden = true
             initialsLabel.isHidden = false
-            let initials = name.capitalized.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
+            let initials = name.capitalized.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1 == "" ? "" : "\($1.first!)")" }
             initialsLabel.text = initials
             initialsLabel.font = UIFont.systemFont(ofSize: fontSize)
         } else {

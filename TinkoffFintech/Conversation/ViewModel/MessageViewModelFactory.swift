@@ -12,7 +12,14 @@ struct MessageViewModelFactory: ViewModelFactory {
     typealias Model = Message
     typealias ViewModel = MessageCellModel
     
+    private static let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm"
+        return df
+    }()
+    
     static func createViewModel(with model: Message) -> MessageCellModel {
-        return MessageCellModel(text: model.text)
+        let dateString = dateFormatter.string(from: model.created)
+        return MessageCellModel(senderName: model.senderName, content: model.content, created: dateString)
     }
 }

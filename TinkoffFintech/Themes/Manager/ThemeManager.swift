@@ -57,8 +57,8 @@ struct ThemeManager {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.backgroundColor = theme.colors.UIElementColor
-            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : theme.colors.baseFontColor]
-            appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : theme.colors.baseFontColor]
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.colors.baseFontColor]
+            appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.colors.baseFontColor]
             
             proxyNavigationBar.standardAppearance = appearance
             proxyNavigationBar.scrollEdgeAppearance = appearance
@@ -68,8 +68,8 @@ struct ThemeManager {
             }
         } else {
             proxyNavigationBar.barTintColor = theme.colors.UIElementColor
-            proxyNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : theme.colors.baseFontColor]
-            proxyNavigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : theme.colors.baseFontColor]
+            proxyNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.colors.baseFontColor]
+            proxyNavigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.colors.baseFontColor]
             proxyNavigationBar.barStyle = theme.colors.barStyle
         }
         

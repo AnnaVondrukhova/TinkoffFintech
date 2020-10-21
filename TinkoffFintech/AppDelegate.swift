@@ -8,6 +8,7 @@
 
 import UIKit
 import os
+import Firebase
 
 enum UIApplicationState {
     case notRunning
@@ -28,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.notRunning)", "\(UIApplicationState.inactive)", "\(#function)")
+        FirebaseApp.configure()
         return true
     }
 
@@ -57,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        os_log("Application moved from %s/$s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.background)", "\(UIApplicationState.suspended)", "\(UIApplicationState.notRunning)", "\(#function)")
+        os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.background)", "\(UIApplicationState.notRunning)", "\(#function)")
     }
     
     func changeStatusBar(theme: Theme) {
@@ -67,4 +69,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

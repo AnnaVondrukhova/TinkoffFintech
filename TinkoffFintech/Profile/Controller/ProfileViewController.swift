@@ -82,8 +82,8 @@ class ProfileViewController: UIViewController, AlertPresentable {
     var isEditingProfile = false
     var photoIsSame = true
     
-    let avatarViewWidth = min(240.0, UIScreen.main.bounds.height*0.3)
-    let fontSize = min(120.0, UIScreen.main.bounds.height*0.15)
+    let avatarViewWidth = min(240.0, UIScreen.main.bounds.height * 0.3)
+    let fontSize = min(120.0, UIScreen.main.bounds.height * 0.15)
     var currentTheme = ThemeManager.currentTheme
             
     override func viewDidLoad() {
@@ -178,7 +178,7 @@ class ProfileViewController: UIViewController, AlertPresentable {
         closeBarButton.tintColor = .systemBlue
         
         avatarView.isUserInteractionEnabled = true
-        avatarView.layer.cornerRadius = avatarViewWidth/2
+        avatarView.layer.cornerRadius = avatarViewWidth / 2
         
         nameTextField.textColor = currentTheme.colors.baseFontColor
         nameTextField.isEnabled = false
@@ -197,8 +197,8 @@ class ProfileViewController: UIViewController, AlertPresentable {
     }
     
     func configureAvatarView(with user: User, fontSize: CGFloat) {
-        avatarView.layer.cornerRadius = avatarViewWidth/2
-        avatarView.configure(image: user.photo, name: user.name, fontSize: fontSize, cornerRadius: avatarViewWidth/2)
+        avatarView.layer.cornerRadius = avatarViewWidth / 2
+        avatarView.configure(image: user.photo, name: user.name, fontSize: fontSize, cornerRadius: avatarViewWidth / 2)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -253,7 +253,8 @@ class ProfileViewController: UIViewController, AlertPresentable {
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        self.showAlert(title: "Edit photo", message: "Please choose one of the ways", preferredStyle: .actionSheet, actions: [choosePhotoAction, takePhotoAction, cancelAction], completion: nil)
+        let message = "Please choose one of the ways"
+        self.showAlert(title: "Edit photo", message: message, preferredStyle: .actionSheet, actions: [choosePhotoAction, takePhotoAction, cancelAction], completion: nil)
     }
     
     @IBAction func editBarButtonPressed(_ sender: Any) {
@@ -285,12 +286,11 @@ class ProfileViewController: UIViewController, AlertPresentable {
         dismiss(animated: true, completion: nil)
     }
     
-    
     func compareFields() {
         let name = nameTextField.text
         let description = descriptionTextView.text
         
-        if (name != self.user.name)||(description != self.user.description)||(!photoIsSame) {
+        if (name != self.user.name) || (description != self.user.description) || (!photoIsSame) {
             self.saveWithGCDButton.setTitleColor(.systemBlue, for: .normal)
             self.saveWithGCDButton.isEnabled = true
             self.saveWithOperationButton.setTitleColor(.systemBlue, for: .normal)
@@ -375,7 +375,7 @@ class ProfileViewController: UIViewController, AlertPresentable {
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var newPhoto = UIImage()
         
         if let photo = info[.editedImage] as? UIImage {
@@ -386,9 +386,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        
         dismiss(animated: true, completion: nil)
-        avatarView.configure(image: newPhoto, cornerRadius: avatarViewWidth/2)
+        avatarView.configure(image: newPhoto, cornerRadius: avatarViewWidth / 2)
         
         let queue = DispatchQueue.global()
         queue.async {
@@ -404,4 +403,3 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
     }
 }
-

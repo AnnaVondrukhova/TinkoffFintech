@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 struct Constants {
+    //senderId
+    static let senderId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    static var senderName = "No name"
+    
     //colors
     static let userPhotoBackgrounColor = UIColor(red: 0.89, green: 0.91, blue: 0.17, alpha: 1.00)
     static let contactPhotoBackgrounColor = UIColor(red: 0.89, green: 0.91, blue: 0.17, alpha: 1.00)
