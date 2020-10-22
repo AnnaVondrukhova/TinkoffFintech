@@ -15,16 +15,21 @@ extension Log {
 
 class ProfileViewController: UIViewController, AlertPresentable {
     
+    @IBOutlet var headerView: UIView!
+    @IBOutlet var headerTitle: UILabel!
+    @IBOutlet var closeButton: UIButton!
+    
     @IBOutlet var avatarView: AvatarView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var detailsLabel: UILabel!
     @IBOutlet var saveButton: UIButton!
-    @IBOutlet var closeButton: UIButton!
+    
 
     var imagePicker: UIImagePickerController!
     
     var user = User.testUser
+    var currentTheme = ThemeManager.currentTheme
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -69,13 +74,21 @@ class ProfileViewController: UIViewController, AlertPresentable {
         nameLabel.text = user.name
         detailsLabel.text = user.description
         
-        configureAvatarView(with: user)
+        self.view.backgroundColor = currentTheme.colors.backgroundColor
+        headerView.backgroundColor = currentTheme.colors.UIElementColor
+        headerTitle.textColor = currentTheme.colors.baseFontColor
+        nameLabel.textColor = currentTheme.colors.baseFontColor
+        detailsLabel.textColor = currentTheme.colors.baseFontColor
+        saveButton.backgroundColor = currentTheme.colors.UIElementColor
+        
+        let fontSize = avatarView.bounds.width/2
+        configureAvatarView(with: user, fontSize: fontSize)
     }
     
-    func configureAvatarView(with user: User) {
+    func configureAvatarView(with user: User, fontSize: CGFloat) {
         avatarView.layer.cornerRadius = avatarView.bounds.width/2
         avatarView.backgroundColor = Constants.userPhotoBackgrounColor
-        avatarView.configure(image: user.photo, name: user.name, fontSize: Constants.profileAvatarFontSize, cornerRadius: avatarView.layer.cornerRadius)
+        avatarView.configure(image: user.photo, name: user.name, fontSize: fontSize, cornerRadius: avatarView.layer.cornerRadius)
     }
     
     @IBAction func editButtonTapped(_ sender: Any) {
@@ -101,7 +114,7 @@ class ProfileViewController: UIViewController, AlertPresentable {
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        self.showAlert(title: "Change photo", message: nil, preferredStyle: .actionSheet, actions: [choosePhotoAction, takePhotoAction, cancelAction], completion: nil)
+        self.showAlert(title: "Edit photo", message: "Please choose one of the ways", preferredStyle: .actionSheet, actions: [choosePhotoAction, takePhotoAction, cancelAction], completion: nil)
     }
     
     @objc func closeButtonPressed() {

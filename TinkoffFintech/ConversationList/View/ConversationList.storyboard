@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="2br-b0-WiV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="f2j-f3-R4Y" id="iEO-5G-4zQ"/>
@@ -28,13 +28,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2br-b0-WiV" firstAttribute="leading" secondItem="8QH-7M-tED" secondAttribute="leading" id="HM9-LX-vVd"/>
-                            <constraint firstItem="8QH-7M-tED" firstAttribute="bottom" secondItem="2br-b0-WiV" secondAttribute="bottom" id="KQG-nn-66p"/>
+                            <constraint firstAttribute="bottom" secondItem="2br-b0-WiV" secondAttribute="bottom" id="KQG-nn-66p"/>
                             <constraint firstItem="8QH-7M-tED" firstAttribute="trailing" secondItem="2br-b0-WiV" secondAttribute="trailing" id="NqJ-py-07R"/>
                             <constraint firstItem="2br-b0-WiV" firstAttribute="top" secondItem="8QH-7M-tED" secondAttribute="top" id="icZ-bJ-uE4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8QH-7M-tED"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="Idk-cd-GOy"/>
+                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="Idk-cd-GOy">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="settings" id="nYv-cT-xpG">
+                            <connections>
+                                <action selector="leftBarButtonPressed:" destination="f2j-f3-R4Y" id="4mu-Ho-Cqr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2br-b0-WiV" id="k3p-0t-xkb"/>
                     </connections>
@@ -62,4 +68,7 @@
             <point key="canvasLocation" x="115.94202898550725" y="128.57142857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settings" width="100" height="100"/>
+    </resources>
 </document>
