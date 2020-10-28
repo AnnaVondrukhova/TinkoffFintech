@@ -104,7 +104,6 @@ class ProfileViewController: UIViewController, AlertPresentable {
         //загрузка данных через Operation
 //        saveDataManager = OperationDataManager()
         
-        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         saveDataManager.loadData { (name, description, photo) in
             self.user.name = name ?? "No name"
@@ -309,7 +308,6 @@ class ProfileViewController: UIViewController, AlertPresentable {
     }
     
     func saveToFile(tag: Int) {
-        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
         self.backgroundView.isUserInteractionEnabled = false

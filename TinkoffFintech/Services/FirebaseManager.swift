@@ -87,7 +87,7 @@ class FirebaseManager {
                 snapshot.documentChanges.forEach { (diff) in
                     if (diff.type == .added) {
                         let messageDict = diff.document.data()
-                        if let message = Message(dict: messageDict) {
+                        if let message = Message(identifier: diff.document.documentID, dict: messageDict) {
                             messages.append(message)
                         }
                     }
@@ -100,12 +100,7 @@ class FirebaseManager {
         }
     }
     
-    func sendMessage(channelId: String, message: Message, completion: @escaping (Error?) -> Void) {
-        let messageData = ["content": message.content,
-                           "created": Timestamp(date: message.created),
-                           "senderId": message.senderId,
-                           "senderName": message.senderName] as [String : Any]
-        
+    func sendMessage(channelId: String, messageData: [String: Any], completion: @escaping (Error?) -> Void) {
         let reference = db.collection("channels").document(channelId).collection("messages")
         let firebaseQueue = DispatchQueue.global()
         firebaseQueue.async {

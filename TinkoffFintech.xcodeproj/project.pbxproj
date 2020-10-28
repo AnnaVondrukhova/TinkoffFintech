@@ -12,6 +12,10 @@
 		C178CD85252277810007CB77 /* MessageViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD84252277810007CB77 /* MessageViewModelFactory.swift */; };
 		C178CD8725227A720007CB77 /* SentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD8625227A720007CB77 /* SentMessageCell.swift */; };
 		C178CD8925227A990007CB77 /* ReceivedMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD8825227A990007CB77 /* ReceivedMessageCell.swift */; };
+		C180993B2548B91E00EB58BA /* MessageDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099392548B91E00EB58BA /* MessageDB+CoreDataClass.swift */; };
+		C180993C2548B91E00EB58BA /* MessageDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180993A2548B91E00EB58BA /* MessageDB+CoreDataProperties.swift */; };
+		C180993F2548B94700EB58BA /* ChannelDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180993D2548B94700EB58BA /* ChannelDB+CoreDataClass.swift */; };
+		C18099402548B94700EB58BA /* ChannelDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180993E2548B94700EB58BA /* ChannelDB+CoreDataProperties.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
 		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C19696A7251FD9010077BDE8 /* ConversationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19696A6251FD9010077BDE8 /* ConversationList.storyboard */; };
@@ -40,6 +44,8 @@
 		C1FA15CF2539C15D00CE86E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1FA15CE2539C15D00CE86E7 /* GoogleService-Info.plist */; };
 		C1FA15D12539C32100CE86E7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15D02539C32100CE86E7 /* FirebaseManager.swift */; };
 		C1FA15D3253B151F00CE86E7 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15D2253B151F00CE86E7 /* CustomTextField.swift */; };
+		C1FA15DD25486A1400CE86E7 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */; };
+		C1FA15DF25486BE700CE86E7 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DE25486BE700CE86E7 /* CoreDataStack.swift */; };
 		F3958D301D7ACA676178EA57 /* Pods_TinkoffFintech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +56,10 @@
 		C178CD84252277810007CB77 /* MessageViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModelFactory.swift; sourceTree = "<group>"; };
 		C178CD8625227A720007CB77 /* SentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageCell.swift; sourceTree = "<group>"; };
 		C178CD8825227A990007CB77 /* ReceivedMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageCell.swift; sourceTree = "<group>"; };
+		C18099392548B91E00EB58BA /* MessageDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C180993A2548B91E00EB58BA /* MessageDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C180993D2548B94700EB58BA /* ChannelDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C180993E2548B94700EB58BA /* ChannelDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C19696A6251FD9010077BDE8 /* ConversationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationList.storyboard; sourceTree = "<group>"; };
@@ -80,6 +90,8 @@
 		C1FA15CE2539C15D00CE86E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1FA15D02539C32100CE86E7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		C1FA15D2253B151F00CE86E7 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C1FA15DC25486A1400CE86E7 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
+		C1FA15DE25486BE700CE86E7 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2E8AA83672EDDA7FC14BCF /* Pods-TinkoffFintech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +149,8 @@
 		C178CD7F2522701A0007CB77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C18099392548B91E00EB58BA /* MessageDB+CoreDataClass.swift */,
+				C180993A2548B91E00EB58BA /* MessageDB+CoreDataProperties.swift */,
 				C19696AC251FDFB10077BDE8 /* Message.swift */,
 			);
 			path = Model;
@@ -148,6 +162,7 @@
 				C1CD1DBE250C02CF00568705 /* Assets.xcassets */,
 				C1CD1DC3250C02CF00568705 /* Info.plist */,
 				C1FA15CE2539C15D00CE86E7 /* GoogleService-Info.plist */,
+				C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -182,6 +197,7 @@
 			children = (
 				C196961B2519CA970077BDE8 /* AlertService.swift */,
 				C1FA15D02539C32100CE86E7 /* FirebaseManager.swift */,
+				C1FA15DE25486BE700CE86E7 /* CoreDataStack.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -229,6 +245,8 @@
 		C19696A5251FD7B10077BDE8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C180993D2548B94700EB58BA /* ChannelDB+CoreDataClass.swift */,
+				C180993E2548B94700EB58BA /* ChannelDB+CoreDataProperties.swift */,
 				C19696AA251FDE710077BDE8 /* Conversation.swift */,
 			);
 			path = Model;
@@ -475,14 +493,20 @@
 				C19696AB251FDE710077BDE8 /* Conversation.swift in Sources */,
 				C1CD1DBA250C02CC00568705 /* ProfileViewController.swift in Sources */,
 				C1FA15AA2537628300CE86E7 /* LoadOperation.swift in Sources */,
+				C180993F2548B94700EB58BA /* ChannelDB+CoreDataClass.swift in Sources */,
 				C178CD83252270C80007CB77 /* ConversationViewController.swift in Sources */,
+				C1FA15DF25486BE700CE86E7 /* CoreDataStack.swift in Sources */,
 				C1CD1DB6250C02CC00568705 /* AppDelegate.swift in Sources */,
 				C1FA15D3253B151F00CE86E7 /* CustomTextField.swift in Sources */,
+				C1FA15DD25486A1400CE86E7 /* Chat.xcdatamodeld in Sources */,
 				C1FA159D252C644300CE86E7 /* MessageCellModel.swift in Sources */,
 				C1FA159F252C649600CE86E7 /* ConversationViewModelFactory.swift in Sources */,
+				C180993C2548B91E00EB58BA /* MessageDB+CoreDataProperties.swift in Sources */,
 				C19696B4252069A30077BDE8 /* AvatarView.swift in Sources */,
+				C180993B2548B91E00EB58BA /* MessageDB+CoreDataClass.swift in Sources */,
 				C19A384425232D7600642E58 /* Constants.swift in Sources */,
 				C196961C2519CA970077BDE8 /* AlertService.swift in Sources */,
+				C18099402548B94700EB58BA /* ChannelDB+CoreDataProperties.swift in Sources */,
 				C1969613251947E30077BDE8 /* User.swift in Sources */,
 				C19696A9251FDC6E0077BDE8 /* ConversationListViewController.swift in Sources */,
 				C178CD8725227A720007CB77 /* SentMessageCell.swift in Sources */,
@@ -694,6 +718,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C1FA15DC25486A1400CE86E7 /* Chat.xcdatamodel */,
+			);
+			currentVersion = C1FA15DC25486A1400CE86E7 /* Chat.xcdatamodel */;
+			path = Chat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C1CD1DAA250C02CC00568705 /* Project object */;
 }
