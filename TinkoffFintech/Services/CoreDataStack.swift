@@ -79,16 +79,16 @@ class CoreDataStack {
     }
 
     private func performSave(in context: NSManagedObjectContext) throws {
-        context.performAndWait {
+        context.perform {
+            print("Is main thread: ", Thread.isMainThread)
             do {
                 try context.save()
+                if let parent = context.parent {
+                    try self.performSave(in: parent)
+                }
             } catch {
                 assertionFailure(error.localizedDescription)
             }
-        }
-        
-        if let parent = context.parent {
-            try performSave(in: parent)
         }
     }
     
