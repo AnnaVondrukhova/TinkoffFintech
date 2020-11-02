@@ -94,7 +94,9 @@ class CoreDataStack {
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(contextObjectsDidChange(notification:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: mainContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(contextObjectsDidChange(notification:)),
+                                               name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+                                               object: mainContext)
     }
     
     @objc private func contextObjectsDidChange(notification: NSNotification) {
@@ -144,7 +146,7 @@ class CoreDataStack {
         mainContext.perform {
             do {
                 let channels = try self.mainContext.fetch(request)
-                print ("\nDatabase contains \(channels.count) channels\n")
+                print("\nDatabase contains \(channels.count) channels\n")
                 channels.forEach { (channel) in
                     print("+++Channel details: \(channel.name)")
                 }

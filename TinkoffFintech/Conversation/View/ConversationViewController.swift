@@ -74,6 +74,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         tableView.register(SentMessageCell.self, forCellReuseIdentifier: "sentMessageCell")
         tableView.register(ReceivedMessageCell.self, forCellReuseIdentifier: "receivedMessageCell")
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        tableView.backgroundView = setUpBackgroundLabel()
         
         sendTextView.delegate = self
     
@@ -130,7 +131,6 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tableView.backgroundView = setUpBackgroundLabel()
         self.view.backgroundColor = currentTheme.colors.backgroundColor
     }
     
@@ -192,7 +192,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let text = (textView.text! as NSString).replacingCharacters(in: range, with: text)
         
-        if !text.isEmpty{
+        if !(text.replacingOccurrences(of: " ", with: "") == "") {
             sendButton.isUserInteractionEnabled = true
             sendButton.isHidden = false
         } else {
@@ -236,7 +236,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         let messageData = ["content": text,
                            "created": Timestamp(date: Date()),
                            "senderId": Constants.senderId,
-                           "senderName": Constants.senderName] as [String : Any]
+                           "senderName": Constants.senderName] as [String: Any]
         self.sendTextView.text = ""
         textHeightConstraint.constant = 36
         placeholderLabel.isHidden = false
@@ -279,7 +279,8 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func setUpBackgroundLabel() -> UILabel {
-        let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        let screenBounds = UIScreen.main.bounds
+        let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenBounds.width, height: screenBounds.height))
         backgroundLabel.text = "No messages"
         backgroundLabel.font = .systemFont(ofSize: 27, weight: .semibold)
         backgroundLabel.textColor = currentTheme.colors.secondaryFontColor

@@ -76,7 +76,6 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         
 //        CoreDataStack.shared.printInitialStatistics()
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,8 +156,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         let addChannelRightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChannelBarButtonPressed))
         
         let settingsLeftBarBurron = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(settingsLeftBarButtonPressed))
-        
-        
+                
         self.navigationItem.leftBarButtonItem = settingsLeftBarBurron
         self.navigationItem.rightBarButtonItems = [profileRightBarButton, addChannelRightBarButton]
     }
@@ -190,13 +188,10 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             
             if let channelName = alertController.textFields?.first?.text,
-            !channelName.isEmpty {
-                self.firebaseManager.addChannel(name: channelName) { (channelId, error) in
-                    if let channelId = channelId {
-//                        guard let channel = ChannelDB(identifier: channelId, dict: ["name": channelName]) else { return }
-//                        self.channels.insert(channel, at: 0)
-//                        self.tableView.reloadData()
-                    } else {
+            !channelName.isEmpty,
+            !(channelName.replacingOccurrences(of: " ", with: "") == "") {
+                self.firebaseManager.addChannel(name: channelName) { (error) in
+                    if error != nil {
                         self.showAlert(title: "Error", message: "Failed to create channel", preferredStyle: .alert, actions: [okAction], completion: nil)
                     }
                 }
@@ -282,7 +277,11 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
         tableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {
@@ -313,7 +312,6 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("end update")
-        print(fetchedResultsController.fetchedObjects?.count)
         tableView.endUpdates()
     }
 }
