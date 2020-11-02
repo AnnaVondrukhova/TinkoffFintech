@@ -56,7 +56,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         return label
     }()
     
-    var channel: Channel?
+    var channel: ChannelDB?
     private var messages = [Message]()
     var currentTheme = ThemeManager.currentTheme
     private var firebaseManager: FirebaseManager!

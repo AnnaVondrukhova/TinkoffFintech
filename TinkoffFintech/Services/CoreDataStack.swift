@@ -48,7 +48,7 @@ class CoreDataStack {
         return context
     }()
     
-    private lazy var mainContext: NSManagedObjectContext = {
+    lazy var mainContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.parent = self.writeToDBContext
         context.automaticallyMergesChangesFromParent = true
@@ -70,6 +70,7 @@ class CoreDataStack {
             block(context)
             if context.hasChanges {
                 do {
+                    try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                     try performSave(in: context)
                 } catch {
                     assertionFailure(error.localizedDescription)
@@ -97,6 +98,7 @@ class CoreDataStack {
     }
     
     @objc private func contextObjectsDidChange(notification: NSNotification) {
+//        print("Context object did change")
         guard let userInfo = notification.userInfo else {return}
         
         if let insertedObjects = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {

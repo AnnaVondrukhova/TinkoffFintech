@@ -21,9 +21,20 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     }
     
     var user = User()
-    private var channels = [Channel]()
+//    private var channels = [ChannelDB]()
     private var saveDataManager: SaveDataManager!
     private var firebaseManager: FirebaseManager!
+    private lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
+        let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
+        fetchRequest.resultType = .managedObjectResultType
+        let context = CoreDataStack.shared.mainContext
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+
+        return fetchedResultsController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +50,15 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             self?.currentTheme = theme
         }
         
+        do {
+            try fetchedResultsController.performFetch()
+//            channels = fetchedResultsController.fetchedObjects ?? []
+        } catch {
+            print("Error performing fetch: \(error)")
+        }
+        
         firebaseManager = FirebaseManager()
+        getChannels()
         
         //загрузка данных через GCD
         saveDataManager = GCDDataManager()
@@ -55,39 +74,42 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             }
         }
         
-        CoreDataStack.shared.printInitialStatistics()
+//        CoreDataStack.shared.printInitialStatistics()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        configureNavigationElements()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
+    func getChannels() {
+        print("Get channels")
         firebaseManager.getChannels { (addedChannels, modifiedChannels, removedChannelsIDs) in
-            for channel in addedChannels {
-                self.channels.append(channel)
-            }
-            
-            for channel in modifiedChannels {
-                if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channel.identifier}) {
-                    self.channels.remove(at: oldChannelIndex)
-                    self.channels.append(channel)
-                }
-            }
-            
-            for channelId in removedChannelsIDs {
-                if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channelId}) {
-                    self.channels.remove(at: oldChannelIndex)
-                }
-            }
-            
-            let currentDate = Date()
-            self.channels.sort { ($0.lastActivity ?? currentDate).compare($1.lastActivity ?? currentDate) == .orderedDescending }
-            self.tableView.reloadData()
-            
             CoreDataStack.shared.performSave { (context) in
+                let channels = self.fetchedResultsController.fetchedObjects ?? []
                 for channel in addedChannels {
-                    let channelDB = ChannelDB(context: context)
-                    channelDB.identifier = channel.identifier
-                    channelDB.name = channel.name
-                    channelDB.lastMessage = channel.lastMessage
-                    channelDB.lastActivity = channel.lastActivity
+                    if channels.contains(where: { $0.identifier == channel.identifier }) {
+                        continue
+                    } else {
+                        print("performSave - add channel")
+                        let channelDB = ChannelDB(context: context)
+                        channelDB.identifier = channel.identifier
+                        channelDB.name = channel.name
+                        channelDB.lastMessage = channel.lastMessage
+                        channelDB.lastActivity = channel.lastActivity
+                    }
+                    
                 }
-                
+
                 for channel in modifiedChannels {
                     let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
                     request.predicate = NSPredicate(format: "identifier = %@", channel.identifier)
@@ -102,7 +124,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
                         fatalError(error.localizedDescription)
                     }
                 }
-                
+
                 for channelId in removedChannelsIDs {
                     let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
                     request.predicate = NSPredicate(format: "identifier = %@", channelId)
@@ -118,18 +140,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             }
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        configureNavigationElements()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }
-    
+        
     func configureNavigationElements() {
         let userButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         
@@ -182,9 +193,9 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             !channelName.isEmpty {
                 self.firebaseManager.addChannel(name: channelName) { (channelId, error) in
                     if let channelId = channelId {
-                        guard let channel = Channel(identifier: channelId, dict: ["name": channelName]) else { return }
-                        self.channels.insert(channel, at: 0)
-                        self.tableView.reloadData()
+//                        guard let channel = ChannelDB(identifier: channelId, dict: ["name": channelName]) else { return }
+//                        self.channels.insert(channel, at: 0)
+//                        self.tableView.reloadData()
                     } else {
                         self.showAlert(title: "Error", message: "Failed to create channel", preferredStyle: .alert, actions: [okAction], completion: nil)
                     }
@@ -214,11 +225,12 @@ extension ConversationListViewController: UITableViewDelegate, UITableViewDataSo
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell") as? ConversationCell else { return ConversationCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell") as? ConversationCell,
+            let channels = fetchedResultsController.fetchedObjects else { return ConversationCell() }
         let model = ConversationViewModelFactory.createViewModel(with: channels[indexPath.row])
 
         cell.setUpAppearance(with: model, theme: currentTheme)
@@ -233,11 +245,75 @@ extension ConversationListViewController: UITableViewDelegate, UITableViewDataSo
         let storyboard = UIStoryboard(name: "Conversation", bundle: nil)
         guard let conversationVC = storyboard.instantiateViewController(withIdentifier: "conversationVC") as? ConversationViewController else { return }
         
-        conversationVC.channel = channels[indexPath.row]
+        conversationVC.channel = fetchedResultsController.fetchedObjects?[indexPath.row]
         navigationController?.pushViewController(conversationVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 89
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let channel = fetchedResultsController.fetchedObjects?[indexPath.row] else { return }
+            let channelId = channel.identifier
+            let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+            request.predicate = NSPredicate(format: "identifier = %@", channelId)
+            
+            CoreDataStack.shared.performSave { (context) in
+                do {
+                    let channelDB = try context.fetch(request).first
+                    if let channelDB = channelDB {
+                        context.delete(channelDB)
+                        firebaseManager.deleteChannel(id: channelDB.identifier)
+                    }
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
+            
+        }
+    }
+}
+
+extension ConversationListViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("begin update")
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                print("Inserted channel at line \(newIndexPath)", controller.managedObjectContext.description)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+                print("Updated channel at line \(indexPath)")
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                print("Deleted channel at line \(indexPath)")
+            }
+        case .move:
+            if let indexPath = indexPath,
+               let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                print("Moved channel from line \(indexPath) to line \(newIndexPath)")
+            }
+        @unknown default:
+            print("Unknown case")
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("end update")
+        print(fetchedResultsController.fetchedObjects?.count)
+        tableView.endUpdates()
     }
 }

@@ -54,6 +54,7 @@ class FirebaseManager {
     }
     
     func addChannel(name: String, completion: @escaping (String?, Error?) -> Void) {
+        print("Started Firebase addChannel")
         let reference = db.collection("channels")
         
         let firebaseQueue = DispatchQueue.global()
@@ -70,6 +71,21 @@ class FirebaseManager {
                     DispatchQueue.main.async {
                         completion(channelRef?.documentID, nil)
                     }
+                }
+            }
+        }
+    }
+    
+    func deleteChannel(id: String) {
+        let reference = db.collection("channels")
+        
+        let firebaseQueue = DispatchQueue.global()
+        firebaseQueue.async {
+            reference.document(id).delete { (error) in
+                if let error = error {
+                    print ("Error deleting channel: \(error)")
+                } else {
+                    print("Successfully deleted channel")
                 }
             }
         }
