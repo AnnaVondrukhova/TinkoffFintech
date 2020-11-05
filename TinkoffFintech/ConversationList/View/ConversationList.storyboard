@@ -69,6 +69,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="settings" width="100" height="100"/>
+        <image name="settings" width="25" height="25"/>
     </resources>
 </document>

@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.inactive)", "\(UIApplicationState.inactive)", "\(#function)")
         
-        ThemeManager.applyTheme(theme: ThemeManager.currentTheme)
+        ThemeManager.loadTheme()
         return true
     }
     

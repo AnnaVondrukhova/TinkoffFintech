@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 struct User {
-    var name: String
-    var description: String
+    var name: String?
+    var description: String?
     var photo: UIImage?
-    
-    static var testUser = User(name: "Marina Dudarenko", description: "UX/UI designer, web-designer\nMoscow, Russia")
 }
