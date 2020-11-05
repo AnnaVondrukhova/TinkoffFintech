@@ -71,12 +71,26 @@ class FirebaseManager {
         }
     }
     
-    func deleteChannel(id: String) {
-        let reference = db.collection("channels")
-        
+    func deleteChannel(channelId: String) {
         let firebaseQueue = DispatchQueue.global()
         firebaseQueue.async {
-            reference.document(id).delete { (error) in
+            let messageReference = self.db.collection("channels").document(channelId).collection("messages")
+            messageReference.getDocuments { (snapshot, _) in
+                guard let snapshot = snapshot else { return }
+                
+                snapshot.documents.forEach { (message) in
+                    messageReference.document(message.documentID).delete { (error) in
+                    if let error = error {
+                        print("Error deleting message: \(error)")
+                    } else {
+                        print("Successfully deleted message")
+                    }
+                    }
+                }
+            }
+            
+            let channelReference = self.db.collection("channels")
+            channelReference.document(channelId).delete { (error) in
                 if let error = error {
                     print("Error deleting channel: \(error)")
                 } else {

@@ -21,7 +21,6 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     }
     
     var user = User()
-//    private var channels = [ChannelDB]()
     private var saveDataManager: SaveDataManager!
     private var firebaseManager: FirebaseManager!
     private lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
@@ -52,7 +51,6 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         
         do {
             try fetchedResultsController.performFetch()
-//            channels = fetchedResultsController.fetchedObjects ?? []
         } catch {
             print("Error performing fetch: \(error)")
         }
@@ -75,7 +73,6 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         }
         
 //        CoreDataStack.shared.printInitialStatistics()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -260,7 +257,7 @@ extension ConversationListViewController: UITableViewDelegate, UITableViewDataSo
                     let channelDB = try context.fetch(request).first
                     if let channelDB = channelDB {
                         context.delete(channelDB)
-                        firebaseManager.deleteChannel(id: channelDB.identifier)
+                        firebaseManager.deleteChannel(channelId: channelDB.identifier)
                     }
                 } catch {
                     fatalError(error.localizedDescription)
@@ -306,7 +303,7 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
                 print("Moved channel from line \(indexPath) to line \(newIndexPath)")
             }
         @unknown default:
-            print("Unknown case")
+            print("Unknown channel case")
         }
     }
     
