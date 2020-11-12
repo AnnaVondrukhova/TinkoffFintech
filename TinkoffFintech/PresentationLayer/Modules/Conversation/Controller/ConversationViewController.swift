@@ -14,19 +14,11 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     
     var channel: ChannelDB?
     var currentTheme: Theme
-    private let themeService: ThemeServiceProtocol
-    private var messagesService: MessagesServiceProtocol
-    private var fetchedResultsProvider: MessagesFetchedResultsServiceProtocol
-    private let dataProvider: MessagesDataProviderProtocol
+    private let model: ConversationModelProtocol
     
-    init(themeService: ThemeServiceProtocol,
-         messageService: MessagesServiceProtocol,
-         fetchedResultsProvider: MessagesFetchedResultsServiceProtocol) {
-        self.themeService = themeService
-        self.messagesService = messageService
-        self.fetchedResultsProvider = fetchedResultsProvider
-        self.dataProvider = MessagesDataProvider(fetchedResultsProvider: self.fetchedResultsProvider, themeService: self.themeService)
-        self.currentTheme = themeService.currentTheme
+    init(model: ConversationModelProtocol) {
+        self.model = model
+        self.currentTheme = model.currentTheme()
         
         super.init(nibName: "Conversation", bundle: nil)
     }
@@ -44,9 +36,9 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         navigationItem.title = channel?.name
         navigationItem.largeTitleDisplayMode = .never
                 
-        conversationView.tableView.delegate = dataProvider
-        conversationView.tableView.dataSource = dataProvider
-        fetchedResultsProvider.delegate = self
+        conversationView.tableView.delegate = model.dataProvider
+        conversationView.tableView.dataSource = model.dataProvider
+
         conversationView.tableView.backgroundView = setUpBackgroundLabel()
         conversationView.tableView.separatorStyle = .none
     
@@ -57,14 +49,14 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         conversationView.tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         conversationView.sendButton.addTarget(self, action: #selector(sendButtonPressed(_:)), for: .touchUpInside)
         
-        fetchedResultsProvider.makeFetchedResultsController(channelIdentifier: channel?.identifier)
-        getMessages()
+        model.makeFetchedResultsController(channelIdentifier: channel?.identifier)
+        model.getMessages(channelId: channel?.identifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        currentTheme = themeService.currentTheme
+        currentTheme = model.currentTheme()
         setUpUppearance()
         setUpHeightConstraints()
     }
@@ -99,12 +91,6 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         backgroundLabel.textAlignment = .center
         backgroundLabel.transform = CGAffineTransform(scaleX: 1, y: -1)
         return backgroundLabel
-    }
-
-    func getMessages() {
-        if let channel = self.channel {
-            messagesService.getMessages(channelId: channel.identifier)
-        }
     }
     
     // MARK: textView functions
@@ -161,7 +147,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
             let channel = self.channel else { return }
         
         print("send text: \(text)")
-        messagesService.sendMessage(in: self, channelId: channel.identifier, text: text)
+        model.sendMessage(in: self, channelId: channel.identifier, text: text)
         
         conversationView.sendTextView.text = ""
         textHeightConstraint.constant = 36

@@ -34,6 +34,8 @@
 		C18099A9255C102A00EB58BA /* ChannelsFetchedResultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099A8255C102A00EB58BA /* ChannelsFetchedResultsService.swift */; };
 		C18099AD255D1C8800EB58BA /* MessageDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099AC255D1C8800EB58BA /* MessageDataProvider.swift */; };
 		C18099AF255D1DE400EB58BA /* MessagesFetchedResultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099AE255D1DE400EB58BA /* MessagesFetchedResultsService.swift */; };
+		C18099B1255D61A700EB58BA /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B0255D61A700EB58BA /* ConversationListModel.swift */; };
+		C18099B3255DA29C00EB58BA /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B2255DA29C00EB58BA /* ConversationModel.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
 		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C19696A9251FDC6E0077BDE8 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */; };
@@ -90,6 +92,8 @@
 		C18099A8255C102A00EB58BA /* ChannelsFetchedResultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFetchedResultsService.swift; sourceTree = "<group>"; };
 		C18099AC255D1C8800EB58BA /* MessageDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataProvider.swift; sourceTree = "<group>"; };
 		C18099AE255D1DE400EB58BA /* MessagesFetchedResultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesFetchedResultsService.swift; sourceTree = "<group>"; };
+		C18099B0255D61A700EB58BA /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
+		C18099B2255DA29C00EB58BA /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				C1FA159C252C644300CE86E7 /* MessageCellModel.swift */,
+				C18099B2255DA29C00EB58BA /* ConversationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				C1FA159E252C649600CE86E7 /* ConversationCellModel.swift */,
+				C18099B0255D61A700EB58BA /* ConversationListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 				C1809991255AE79500EB58BA /* FetchManager.swift in Sources */,
 				C19A3852252738E200642E58 /* ThemeService.swift in Sources */,
 				C1FA15D12539C32100CE86E7 /* FirebaseManager.swift in Sources */,
+				C18099B1255D61A700EB58BA /* ConversationListModel.swift in Sources */,
 				C1FA15A62535B87D00CE86E7 /* OperationFileService.swift in Sources */,
 				C180998B255AE3B500EB58BA /* HelperFunctions.swift in Sources */,
 				C19696B1252068650077BDE8 /* ConversationCell.swift in Sources */,
@@ -666,6 +673,7 @@
 				C1809989255AC8FB00EB58BA /* MessagesService.swift in Sources */,
 				C1809982255981E700EB58BA /* ChannelsService.swift in Sources */,
 				C1FA15A42533201500CE86E7 /* GCDFileService.swift in Sources */,
+				C18099B3255DA29C00EB58BA /* ConversationModel.swift in Sources */,
 				C18099752559265B00EB58BA /* PresentationAssembly.swift in Sources */,
 				C18099A6255C0B2A00EB58BA /* ChannelsDataProvider.swift in Sources */,
 				C1FA15A825375C0900CE86E7 /* SaveOperation.swift in Sources */,

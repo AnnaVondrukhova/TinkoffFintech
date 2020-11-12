@@ -23,19 +23,33 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     }
     
     func conversationListViewController() -> ConversationListViewController {
+        var model = conversationListModel()
         let conversationListVC = ConversationListViewController(presentationAssembly: self,
-                                                                themeService: serviceAssembly.themeService,
-                                                                saveToFileService: serviceAssembly.gcdFileService,
-                                                                channelsService: serviceAssembly.channelsService,
-                                                                fetchedResultsProvider: serviceAssembly.channelsFetchResultsProvider)
+                                                                model: model)
+        model.fetchDelegate = conversationListVC
+        model.userInfoDelegate = conversationListVC
         return conversationListVC
     }
     
+    private func conversationListModel() -> ConversationListModelProtocol {
+        return ConversationListModel(themeService: serviceAssembly.themeService,
+                                     saveToFileService: serviceAssembly.gcdFileService,
+                                     channelsService: serviceAssembly.channelsService,
+                                     fetchedResultsProvider: serviceAssembly.channelsFetchResultsProvider)
+    }
+    
     func conversatioViewController() -> ConversationViewController {
-        let conversationVC = ConversationViewController(themeService: serviceAssembly.themeService,
-                                                        messageService: serviceAssembly.messagesService,
-                                                        fetchedResultsProvider: serviceAssembly.messagesFetchResultsProvider)
+        var model = conversationModel()
+        let conversationVC = ConversationViewController(model: model)
+        
+        model.fetchDelegate = conversationVC
         return conversationVC
+    }
+    
+    private func conversationModel() -> ConversationModelProtocol {
+        return ConversationModel(themeService: serviceAssembly.themeService,
+                                 messageService: serviceAssembly.messagesService,
+                                 fetchedResultsProvider: serviceAssembly.messagesFetchResultsProvider)
     }
     
     func profileViewController() -> ProfileViewController {
@@ -49,4 +63,5 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         let themesVC = ThemesViewController(themeService: serviceAssembly.themeService)
         return themesVC
     }
+    
 }

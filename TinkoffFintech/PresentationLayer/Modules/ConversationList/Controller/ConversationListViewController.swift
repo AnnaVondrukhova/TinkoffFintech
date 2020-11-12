@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentableProtocol, ChannelsFetchedResultsServiceDelegate {
+class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentableProtocol, ChannelsFetchedResultsServiceDelegate, UserInfoDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -21,27 +21,14 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     
     var user = User()
     private let presentationAssembly: PresentationAssemblyProtocol
-    private let themeService: ThemeServiceProtocol
-    private let saveToFileService: SaveDataToFileServiceProtocol
-    private let channelsService: ChannelsServiceProtocol
-    private let dataProvider: ChannelsDataProviderProtocol
-    private var fetchedResultsProvider: ChannelsFetchedResultsServiceProtocol
+    private let model: ConversationListModelProtocol
     
     init(presentationAssembly: PresentationAssemblyProtocol,
-         themeService: ThemeServiceProtocol,
-         saveToFileService: SaveDataToFileServiceProtocol,
-         channelsService: ChannelsServiceProtocol,
-         fetchedResultsProvider: ChannelsFetchedResultsServiceProtocol) {
+         model: ConversationListModelProtocol) {
         self.presentationAssembly = presentationAssembly
-        self.themeService = themeService
-        self.saveToFileService = saveToFileService
-        self.channelsService = channelsService
-        self.fetchedResultsProvider = fetchedResultsProvider
-        self.dataProvider = ChannelsDataProvider(fetchedResultsProvider: self.fetchedResultsProvider, channelsService: self.channelsService, themeService: self.themeService)
+        self.model = model
         
-        print("Current theme: \(themeService.currentTheme.rawValue)")
-        self.currentTheme = themeService.currentTheme
-        
+        self.currentTheme = model.currentTheme()
         super.init(nibName: "ConversationList", bundle: nil)
     }
     
@@ -58,9 +45,8 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
-        tableView.delegate = dataProvider
-        tableView.dataSource = dataProvider
-        fetchedResultsProvider.delegate = self
+        tableView.delegate = model.dataProvider
+        tableView.dataSource = model.dataProvider
         NotificationCenter.default.addObserver(self, selector: #selector(showMessages(withNotification:)),
                                                name: NSNotification.Name(rawValue: "DidSelectRow notification"),
                                                object: nil)
@@ -69,18 +55,9 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             self?.currentTheme = theme
         }
         
-        fetchedResultsProvider.makeFetchedResultsController()
-        getChannels()
-        
-        saveToFileService.loadData { (name, _, photo) in
-            DispatchQueue.main.async {
-                self.user.name = name ?? "No name"
-                Constants.senderName = name ?? "No name"
-                self.user.photo = photo
-                
-                self.configureNavigationElements()
-            }
-        }
+        model.makeFetchedResultsController()
+        model.getChannels()
+        model.loadUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,11 +69,6 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
-    }
-    
-    func getChannels() {
-        let currentChannels = fetchedResultsProvider.fetchedResultsController?.fetchedObjects ?? []
-        channelsService.getChannels(currentChannels: currentChannels)
     }
         
     func configureNavigationElements() {
@@ -122,8 +94,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     }
     
     func updateAppearance(theme: Theme) {
-        themeService.applyTheme(theme: theme)
-        themeService.updateWindows()
+        model.setTheme(theme: theme)
         tableView.reloadData()
     }
     
@@ -145,7 +116,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         
         let  createAction = UIAlertAction(title: "Create", style: .default) { (_) in
             if let channelName = alertController.textFields?.first?.text {
-                self.channelsService.addChannel(in: self, channelName: channelName)
+                self.model.addChannel(in: self, channelName: channelName)
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
