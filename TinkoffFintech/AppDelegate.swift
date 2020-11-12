@@ -28,6 +28,7 @@ struct Log {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let rootAssembly = RootAssembly()
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.notRunning)", "\(UIApplicationState.inactive)", "\(#function)")
@@ -38,8 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.inactive)", "\(UIApplicationState.inactive)", "\(#function)")
         
-        ThemeManager.loadTheme()
-        CoreDataStack.shared.addObservers()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let controller = rootAssembly.presentationAssembly.conversationListViewController().embedInNavigationController()
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+        
+        rootAssembly.addObservers()
         return true
     }
     
