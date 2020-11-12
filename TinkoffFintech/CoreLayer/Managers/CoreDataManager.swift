@@ -18,8 +18,6 @@ protocol CoreDataManagerProtocol {
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
-//    static let shared = CoreDataManager()
-    
     private lazy var managedObjectModel: NSManagedObjectModel = {
         guard let modelURL = Bundle.main.url(forResource: "Chat", withExtension: "momd") else {
             fatalError("Failed to find data model")
@@ -85,7 +83,7 @@ class CoreDataManager: CoreDataManagerProtocol {
             }
         }
     }
-
+    
     private func performSave(in context: NSManagedObjectContext) throws {
         context.perform {
             do {
@@ -106,7 +104,7 @@ class CoreDataManager: CoreDataManagerProtocol {
     }
     
     @objc private func contextObjectsDidChange(notification: NSNotification) {
-//        print("Context object did change")
+        //        print("Context object did change")
         guard let userInfo = notification.userInfo else {return}
         
         if let insertedObjects = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {

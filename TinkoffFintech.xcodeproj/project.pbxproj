@@ -366,13 +366,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C196961A2519CA810077BDE8 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		C19696A1251FD7310077BDE8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,7 +475,6 @@
 				C180996F255925B000EB58BA /* PresentationLayer */,
 				C1809970255925D800EB58BA /* ServiceLayer */,
 				C1809971255925F200EB58BA /* CoreLayer */,
-				C196961A2519CA810077BDE8 /* Services */,
 				C19696B2252069790077BDE8 /* Helpers */,
 				C196961625194F050077BDE8 /* Resources */,
 			);

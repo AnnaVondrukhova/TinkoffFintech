@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class ConversationViewController: UIViewController, UITextViewDelegate, AlertPresentableProtocol, MessagesFetchedResultsServiceDelegate {
     
