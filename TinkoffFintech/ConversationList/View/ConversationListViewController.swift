@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentable {
     
@@ -28,6 +29,8 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         super.viewDidLoad()
         
         print(Constants.senderId)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last?.appendingPathComponent("Chat.sqlite") as Any)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         currentTheme = ThemeManager.currentTheme
         tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
@@ -52,16 +55,20 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             }
         }
         
+        CoreDataStack.shared.printInitialStatistics()
+        
         firebaseManager.getChannels { (addedChannels, modifiedChannels, removedChannelsIDs) in
             for channel in addedChannels {
                 self.channels.append(channel)
             }
+            
             for channel in modifiedChannels {
                 if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channel.identifier}) {
                     self.channels.remove(at: oldChannelIndex)
                     self.channels.append(channel)
                 }
             }
+            
             for channelId in removedChannelsIDs {
                 if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channelId}) {
                     self.channels.remove(at: oldChannelIndex)
@@ -71,6 +78,44 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             let currentDate = Date()
             self.channels.sort { ($0.lastActivity ?? currentDate).compare($1.lastActivity ?? currentDate) == .orderedDescending }
             self.tableView.reloadData()
+            
+            CoreDataStack.shared.performSave { (context) in
+                for channel in addedChannels {
+                    let channelDB = ChannelDB(context: context)
+                    channelDB.identifier = channel.identifier
+                    channelDB.name = channel.name
+                    channelDB.lastMessage = channel.lastMessage
+                    channelDB.lastActivity = channel.lastActivity
+                }
+                
+                for channel in modifiedChannels {
+                    let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+                    request.predicate = NSPredicate(format: "identifier = %@", channel.identifier)
+                    do {
+                        let channelDB = try context.fetch(request).first
+                        if let channelDB = channelDB {
+                            channelDB.name = channel.name
+                            channelDB.lastMessage = channel.lastMessage
+                            channelDB.lastActivity = channel.lastActivity
+                        }
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+                
+                for channelId in removedChannelsIDs {
+                    let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+                    request.predicate = NSPredicate(format: "identifier = %@", channelId)
+                    do {
+                        let channelDB = try context.fetch(request).first
+                        if let channelDB = channelDB {
+                            context.delete(channelDB)
+                        }
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
         }
     }
     

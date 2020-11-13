@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         os_log("Application moved from %s to %s: %s", log: Log.appDelegate, type: .debug, "\(UIApplicationState.inactive)", "\(UIApplicationState.inactive)", "\(#function)")
         
         ThemeManager.loadTheme()
+        CoreDataStack.shared.addObservers()
         return true
     }
     

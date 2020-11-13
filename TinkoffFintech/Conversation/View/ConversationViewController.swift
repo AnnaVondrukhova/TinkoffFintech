@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import CoreData
 
 class ConversationViewController: UIViewController, UITextViewDelegate, AlertPresentable {
 
@@ -90,6 +92,28 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
                 let messages = messages.sorted { $0.created.compare($1.created) == .orderedDescending }
                 self.messages.insert(contentsOf: messages, at: 0)
                 self.tableView.reloadData()
+                
+                CoreDataStack.shared.performSave { (context) in
+                    let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+                    request.predicate = NSPredicate(format: "identifier = %@", channel.identifier)
+                    do {
+                        let channelDB = try context.fetch(request).first
+                        if let channelDB = channelDB {
+                            messages.forEach { (message) in
+                                let messageDB = MessageDB(context: context)
+                                messageDB.identifier = message.identifier
+                                messageDB.content = message.content
+                                messageDB.created = message.created
+                                messageDB.senderId = message.senderId
+                                messageDB.senderName = message.senderName
+                                
+                                channelDB.addToMessages(messageDB)
+                            }
+                        }
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
             }
         }
     }
@@ -208,12 +232,15 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         sendButton.isHidden = true
         
         guard let text = sendTextView.text,
-            let channel = self.channel else { return }
-        let message = Message(content: text)
+        let channel = self.channel else { return }
+        let messageData = ["content": text,
+                           "created": Timestamp(date: Date()),
+                           "senderId": Constants.senderId,
+                           "senderName": Constants.senderName] as [String : Any]
         self.sendTextView.text = ""
         textHeightConstraint.constant = 36
         placeholderLabel.isHidden = false
-        firebaseManager.sendMessage(channelId: channel.identifier, message: message) { (error) in
+        firebaseManager.sendMessage(channelId: channel.identifier, messageData: messageData) { (error) in
             if error != nil {
                 let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 self.showAlert(title: "Error", message: "Failed to send message", preferredStyle: .alert, actions: [okAction], completion: nil)
