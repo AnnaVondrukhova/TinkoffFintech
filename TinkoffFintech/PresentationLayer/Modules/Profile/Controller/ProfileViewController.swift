@@ -13,7 +13,7 @@ extension Log {
     static let viewController = OSLog(subsystem: subsystem, category: "viewController")
 }
 
-class ProfileViewController: UIViewController, AlertPresentableProtocol {
+class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInfoDelegate {
 
     @IBOutlet var backgroundView: ProfileView!
     @IBOutlet var editBarButton: UIBarButtonItem!
@@ -32,9 +32,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
     var imagePicker: UIImagePickerController!
     
     var currentTheme: Theme
-    private let themeService: ThemeServiceProtocol
-    private let gcdFileService: SaveDataToFileServiceProtocol
-    private let operationFileService: SaveDataToFileServiceProtocol
+    private let model: ProfileModelProtocol
     
     var user = User()
     var delegate: ConversationListViewController!
@@ -42,13 +40,9 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
     var isEditingProfile = false
     var photoIsSame = true
     
-    init(themeService: ThemeServiceProtocol,
-         gcdFileService: SaveDataToFileServiceProtocol,
-         operationFileService: SaveDataToFileServiceProtocol) {
-        self.themeService = themeService
-        self.gcdFileService = gcdFileService
-        self.operationFileService = operationFileService
-        self.currentTheme = themeService.currentTheme
+    init(model: ProfileModelProtocol) {
+        self.model = model
+        self.currentTheme = model.currentTheme()
         
         super.init(nibName: "Profile", bundle: nil)
     }
@@ -69,26 +63,14 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
         setColors()
         setUpActivityIndicator()
         
-        //загрузка данных через GCD
-        let loadService = gcdFileService
-        
-        //загрузка данных через Operation
-//        let loadService = operationFileService
-        
         activityIndicator.startAnimating()
-        loadService.loadData { (name, description, photo) in
-            self.user.name = name ?? "No name"
-            self.user.description = description ?? "No description"
-            self.user.photo = photo
+        model.loadUserData {
+            self.activityIndicator.stopAnimating()
             
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                
-                self.backgroundView.nameTextField.text = self.user.name
-                self.backgroundView.descriptionTextView.text = self.user.description
-                
-                self.backgroundView.configureAvatarView(with: self.user)
-            }
+            self.backgroundView.nameTextField.text = self.user.name
+            self.backgroundView.descriptionTextView.text = self.user.description
+            
+            self.backgroundView.configureAvatarView(with: self.user)
         }
     }
     
@@ -104,19 +86,10 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
     }
     
     func setColors() {
-        self.backgroundView.backgroundColor = currentTheme.colors.backgroundColor
         editBarButton.tintColor = .systemBlue
         closeBarButton.tintColor = .systemBlue
         
-        backgroundView.nameTextField.textColor = currentTheme.colors.baseFontColor
-        backgroundView.descriptionTextView.textColor = currentTheme.colors.baseFontColor
-        backgroundView.descriptionTextView.backgroundColor = currentTheme.colors.backgroundColor
-        
-        backgroundView.saveWithGCDButton.backgroundColor = currentTheme.colors.UIElementColor
-        backgroundView.saveWithGCDButton.setTitleColor(currentTheme.colors.secondaryFontColor, for: .normal)
-        
-        backgroundView.saveWithOperationButton.backgroundColor = currentTheme.colors.UIElementColor
-        backgroundView.saveWithOperationButton.setTitleColor(currentTheme.colors.secondaryFontColor, for: .normal)
+        backgroundView.setColors(theme: currentTheme)
     }
     
     func setUpActivityIndicator() {
@@ -148,11 +121,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
         isEditingProfile.toggle()
         
         editBarButton.title = "Edit"
-        backgroundView.nameTextField.isEnabled = false
-        backgroundView.nameTextField.borderStyle = .none
-        
-        backgroundView.descriptionTextView.isEditable = false
-        backgroundView.descriptionTextView.layer.borderWidth = 0.0
+        backgroundView.setElementsDeselected()
         
         compareFields()
     }
@@ -190,20 +159,10 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
         if isEditingProfile {
             editBarButton.title = "Done"
             
-            backgroundView.nameTextField.isEnabled = true
-            backgroundView.nameTextField.borderStyle = .line
-            backgroundView.nameTextField.layer.borderColor = currentTheme.colors.secondaryFontColor.cgColor
-            
-            backgroundView.descriptionTextView.isEditable = true
-            backgroundView.descriptionTextView.layer.borderWidth = 1.0
-            backgroundView.descriptionTextView.layer.borderColor = currentTheme.colors.secondaryFontColor.cgColor
+            backgroundView.setElementsSelected()
         } else {
             editBarButton.title = "Edit"
-            backgroundView.nameTextField.isEnabled = false
-            backgroundView.nameTextField.borderStyle = .none
-            
-            backgroundView.descriptionTextView.isEditable = false
-            backgroundView.descriptionTextView.layer.borderWidth = 0.0
+            backgroundView.setElementsDeselected()
             
             compareFields()
         }
@@ -218,15 +177,9 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
         let description = backgroundView.descriptionTextView.text
         
         if (name != self.user.name) || (description != self.user.description) || (!photoIsSame) {
-            self.backgroundView.saveWithGCDButton.setTitleColor(.systemBlue, for: .normal)
-            self.backgroundView.saveWithGCDButton.isEnabled = true
-            self.backgroundView.saveWithOperationButton.setTitleColor(.systemBlue, for: .normal)
-            self.backgroundView.saveWithOperationButton.isEnabled = true
+            backgroundView.buttonsEnabled()
         } else {
-            self.backgroundView.saveWithGCDButton.setTitleColor(self.currentTheme.colors.secondaryFontColor, for: .normal)
-            self.backgroundView.saveWithGCDButton.isEnabled = false
-            self.backgroundView.saveWithOperationButton.setTitleColor(self.currentTheme.colors.secondaryFontColor, for: .normal)
-            self.backgroundView.saveWithOperationButton.isEnabled = false
+            backgroundView.buttonsDisabled(theme: currentTheme)
         }
     }
 
@@ -239,24 +192,15 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
     func saveToFile(tag: Int) {
         activityIndicator.startAnimating()
         
-        self.backgroundView.isUserInteractionEnabled = false
-        self.backgroundView.saveWithGCDButton.setTitleColor(self.currentTheme.colors.secondaryFontColor, for: .normal)
-        self.backgroundView.saveWithGCDButton.isEnabled = false
-        self.backgroundView.saveWithOperationButton.setTitleColor(self.currentTheme.colors.secondaryFontColor, for: .normal)
-        self.backgroundView.saveWithOperationButton.isEnabled = false
+        backgroundView.isUserInteractionEnabled = false
+        backgroundView.buttonsDisabled(theme: currentTheme)
         
         let name = (backgroundView.nameTextField.text == user.name) ? nil : backgroundView.nameTextField.text
         let description = (backgroundView.descriptionTextView.text == user.description) ? nil : backgroundView.descriptionTextView.text
         let photo = photoIsSame ? nil : backgroundView.avatarView.imageView.image
         
-        if tag == 0 {
-            gcdFileService.saveData(name: name, description: description, photo: photo) { (savedFields, fails) in
-                self.savingCompletionBlock(savedFields: savedFields, fails: fails, tag: tag)
-            }
-        } else if tag == 1 {
-            operationFileService.saveData(name: name, description: description, photo: photo) { (savedFields, fails) in
-                self.savingCompletionBlock(savedFields: savedFields, fails: fails, tag: tag)
-            }
+        model.saveUserData(tag: tag, name: name, description: description, photo: photo) { (savedFields, fails) in
+            self.savingCompletionBlock(savedFields: savedFields, fails: fails, tag: tag)
         }
     }
     
@@ -279,10 +223,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol {
             self.showAlert(title: "Data saved", message: nil, preferredStyle: .alert, actions: [okAction], completion: nil)
         } else {
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                self.backgroundView.saveWithGCDButton.setTitleColor(.systemBlue, for: .normal)
-                self.backgroundView.saveWithGCDButton.isEnabled = true
-                self.backgroundView.saveWithOperationButton.setTitleColor(.systemBlue, for: .normal)
-                self.backgroundView.saveWithOperationButton.isEnabled = true
+                self.backgroundView.buttonsEnabled()
             }
             let repeatAction = UIAlertAction(title: "Try again", style: .default) { _ in
                 self.saveToFile(tag: tag)

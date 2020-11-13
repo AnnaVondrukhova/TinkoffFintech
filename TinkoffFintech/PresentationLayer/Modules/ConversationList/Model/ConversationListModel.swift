@@ -8,25 +8,16 @@
 
 import Foundation
 
-protocol ConversationListModelProtocol {
+protocol ConversationListModelProtocol: UserInfoProtocol, ThemesProtocol {
     var fetchDelegate: ChannelsFetchedResultsServiceDelegate? { get set }
-    var userInfoDelegate: UserInfoDelegate? { get set }
     var dataProvider: ChannelsDataProviderProtocol { get }
     
     func makeFetchedResultsController()
     func getChannels()
     func addChannel(in vc: AlertPresentableProtocol, channelName: String)
-    func loadUserData()
-    func currentTheme() -> Theme
-    func setTheme(theme: Theme)
 }
 
-protocol UserInfoDelegate: class {
-    var user: User { get set }
-    func configureNavigationElements()
-}
-
-class ConversationListModel: ConversationListModelProtocol {
+class ConversationListModel: ConversationListModelProtocol, UserInfoProtocol {
     weak var fetchDelegate: ChannelsFetchedResultsServiceDelegate?
     weak var userInfoDelegate: UserInfoDelegate?
     
@@ -62,14 +53,14 @@ class ConversationListModel: ConversationListModelProtocol {
         channelsService.addChannel(in: vc, channelName: channelName)
     }
     
-    func loadUserData() {
+    func loadUserData(completion: @escaping() -> Void) {
         saveToFileService.loadData { (name, _, photo) in
             DispatchQueue.main.async {
                 self.userInfoDelegate?.user.name = name ?? "No name"
                 Constants.senderName = name ?? "No name"
                 self.userInfoDelegate?.user.photo = photo
                 
-                self.userInfoDelegate?.configureNavigationElements()
+                completion()
             }
         }
     }

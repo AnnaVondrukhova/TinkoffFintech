@@ -36,6 +36,8 @@
 		C18099AF255D1DE400EB58BA /* MessagesFetchedResultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099AE255D1DE400EB58BA /* MessagesFetchedResultsService.swift */; };
 		C18099B1255D61A700EB58BA /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B0255D61A700EB58BA /* ConversationListModel.swift */; };
 		C18099B3255DA29C00EB58BA /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B2255DA29C00EB58BA /* ConversationModel.swift */; };
+		C18099B5255E8A3B00EB58BA /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B4255E8A3B00EB58BA /* ProfileModel.swift */; };
+		C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B6255E9DF800EB58BA /* ThemesModel.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
 		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C19696A9251FDC6E0077BDE8 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */; };
@@ -94,6 +96,8 @@
 		C18099AE255D1DE400EB58BA /* MessagesFetchedResultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesFetchedResultsService.swift; sourceTree = "<group>"; };
 		C18099B0255D61A700EB58BA /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
 		C18099B2255DA29C00EB58BA /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		C18099B4255E8A3B00EB58BA /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		C18099B6255E9DF800EB58BA /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				C1969612251947E30077BDE8 /* User.swift */,
+				C18099B4255E8A3B00EB58BA /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				C19A384E252737B700642E58 /* Colors.swift */,
+				C18099B6255E9DF800EB58BA /* ThemesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				C178CD8925227A990007CB77 /* ReceivedMessageCell.swift in Sources */,
 				C19A384F252737B700642E58 /* Colors.swift in Sources */,
 				C19A384C252736A600642E58 /* ThemesViewController.swift in Sources */,
+				C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */,
 				C1CD1DBA250C02CC00568705 /* ProfileViewController.swift in Sources */,
 				C1FA15AA2537628300CE86E7 /* LoadOperation.swift in Sources */,
 				C180993F2548B94700EB58BA /* ChannelDB+CoreDataClass.swift in Sources */,
@@ -669,6 +676,7 @@
 				C1FA15A62535B87D00CE86E7 /* OperationFileService.swift in Sources */,
 				C180998B255AE3B500EB58BA /* HelperFunctions.swift in Sources */,
 				C19696B1252068650077BDE8 /* ConversationCell.swift in Sources */,
+				C18099B5255E8A3B00EB58BA /* ProfileModel.swift in Sources */,
 				C18099A4255BF48A00EB58BA /* ProfileView.swift in Sources */,
 				C1809989255AC8FB00EB58BA /* MessagesService.swift in Sources */,
 				C1809982255981E700EB58BA /* ChannelsService.swift in Sources */,

@@ -123,4 +123,51 @@ class ProfileView: UIView {
         saveWithGCDButton.isEnabled = false
         saveWithOperationButton.isEnabled = false
     }
+    
+    func setColors(theme: Theme) {
+        self.backgroundColor = theme.colors.backgroundColor
+        
+        nameTextField.textColor = theme.colors.baseFontColor
+        nameTextField.layer.borderColor = theme.colors.secondaryFontColor.cgColor
+        
+        descriptionTextView.textColor = theme.colors.baseFontColor
+        descriptionTextView.backgroundColor = theme.colors.backgroundColor
+        descriptionTextView.layer.borderColor = theme.colors.secondaryFontColor.cgColor
+        
+        saveWithGCDButton.backgroundColor = theme.colors.UIElementColor
+        saveWithGCDButton.setTitleColor(theme.colors.secondaryFontColor, for: .normal)
+        
+        saveWithOperationButton.backgroundColor = theme.colors.UIElementColor
+        saveWithOperationButton.setTitleColor(theme.colors.secondaryFontColor, for: .normal)
+    }
+    
+    func setElementsSelected() {
+        nameTextField.isEnabled = true
+        nameTextField.borderStyle = .line
+        
+        descriptionTextView.isEditable = true
+        descriptionTextView.layer.borderWidth = 1.0
+    }
+    
+    func setElementsDeselected() {
+        nameTextField.isEnabled = false
+        nameTextField.borderStyle = .none
+        
+        descriptionTextView.isEditable = false
+        descriptionTextView.layer.borderWidth = 0.0
+    }
+    
+    func buttonsEnabled() {
+        saveWithGCDButton.setTitleColor(.systemBlue, for: .normal)
+        saveWithGCDButton.isEnabled = true
+        saveWithOperationButton.setTitleColor(.systemBlue, for: .normal)
+        saveWithOperationButton.isEnabled = true
+    }
+    
+    func buttonsDisabled(theme: Theme) {
+        saveWithGCDButton.setTitleColor(theme.colors.secondaryFontColor, for: .normal)
+        saveWithGCDButton.isEnabled = false
+        saveWithOperationButton.setTitleColor(theme.colors.secondaryFontColor, for: .normal)
+        saveWithOperationButton.isEnabled = false
+    }
 }

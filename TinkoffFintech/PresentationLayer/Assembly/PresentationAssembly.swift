@@ -53,15 +53,26 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     }
     
     func profileViewController() -> ProfileViewController {
-        let profileVC = ProfileViewController(themeService: serviceAssembly.themeService,
-                                              gcdFileService: serviceAssembly.gcdFileService,
-                                              operationFileService: serviceAssembly.operationFileService)
+        var model = profileModel()
+        let profileVC = ProfileViewController(model: model)
+        model.userInfoDelegate = profileVC
         return profileVC
     }
     
+    private func profileModel() -> ProfileModelProtocol {
+        return ProfileModel(themeService: serviceAssembly.themeService,
+                            gcdFileService: serviceAssembly.gcdFileService,
+                            operationFileService: serviceAssembly.operationFileService)
+    }
+    
     func themesViewController() -> ThemesViewController {
-        let themesVC = ThemesViewController(themeService: serviceAssembly.themeService)
+        let model = themesModel()
+        let themesVC = ThemesViewController(model: model)
         return themesVC
+    }
+    
+    private func themesModel() -> ThemesModelProtocol {
+        return ThemesModel(themeService: serviceAssembly.themeService)
     }
     
 }

@@ -21,11 +21,12 @@ class ThemesViewController: UIViewController {
     var delegate: ThemesPickerDelegate?
     var setThemeClosure: ((Theme) -> Void)?
     var selectedTheme: Theme
-    private let themeService: ThemeServiceProtocol
+//    private let themeService: ThemeServiceProtocol
+    private let model: ThemesModelProtocol
     
-    init(themeService: ThemeServiceProtocol) {
-        self.themeService = themeService
-        self.selectedTheme = themeService.currentTheme
+    init(model: ThemesModelProtocol) {
+        self.model = model
+        self.selectedTheme = model.currentTheme()
         
         super.init(nibName: "Themes", bundle: nil)
     }
@@ -49,7 +50,7 @@ class ThemesViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        themeService.saveTheme(theme: selectedTheme)
+        model.saveTheme(theme: selectedTheme)
     }
     
     func setUpNavigationBar() {
@@ -59,7 +60,7 @@ class ThemesViewController: UIViewController {
     }
     
     @objc func cancelTheme() {
-        selectedTheme = themeService.currentTheme
+        selectedTheme = model.currentTheme()
         updateAppearance(theme: selectedTheme)
         navigationController?.popViewController(animated: true)
     }

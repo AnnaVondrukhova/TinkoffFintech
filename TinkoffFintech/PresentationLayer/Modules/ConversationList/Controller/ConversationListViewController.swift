@@ -57,7 +57,9 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         
         model.makeFetchedResultsController()
         model.getChannels()
-        model.loadUserData()
+        model.loadUserData {
+            self.configureNavigationElements()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
