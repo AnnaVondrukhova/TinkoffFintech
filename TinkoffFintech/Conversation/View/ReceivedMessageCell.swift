@@ -17,11 +17,28 @@ class ReceivedMessageCell: UITableViewCell, ConfigurableView {
         return view
     }()
     
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let messageLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 11.0)
+        label.numberOfLines = 1
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,17 +57,29 @@ class ReceivedMessageCell: UITableViewCell, ConfigurableView {
     func setUpLayers() {
         contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         contentView.addSubview(messageView)
+        messageView.addSubview(nameLabel)
         messageView.addSubview(messageLabel)
+        messageView.addSubview(dateLabel)
         
         messageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5.0).isActive = true
         messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20.0).isActive = true
         messageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5.0).isActive = true
-        messageView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -contentView.frame.width/4).isActive = true
+        messageView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -contentView.frame.width / 4).isActive = true
         
-        messageLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 5.0).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 5.0).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: messageView.leadingAnchor, constant: 15.0).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: messageView.trailingAnchor, constant: -15.0).isActive = true
+        
+        messageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5.0).isActive = true
         messageLabel.leadingAnchor.constraint(equalTo: messageView.leadingAnchor, constant: 15.0).isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -5.0).isActive = true
+        messageLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor).isActive = true
         messageLabel.trailingAnchor.constraint(equalTo: messageView.trailingAnchor, constant: -15.0).isActive = true
+        
+        dateLabel.trailingAnchor.constraint(equalTo: messageView.trailingAnchor, constant: -8).isActive = true
+        dateLabel.widthAnchor.constraint(equalToConstant: 165).isActive = true
+        dateLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        dateLabel.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -6).isActive = true
     }
     
     func configure(with model: MessageCellModel) {
@@ -59,7 +88,11 @@ class ReceivedMessageCell: UITableViewCell, ConfigurableView {
         contentView.backgroundColor = currentTheme.colors.backgroundColor
         messageView.backgroundColor = currentTheme.colors.receivedMessageViewColor
         
+        nameLabel.textColor = currentTheme.colors.receivedMessageFontColor
+        nameLabel.text = model.senderName
         messageLabel.textColor = currentTheme.colors.receivedMessageFontColor
-        messageLabel.text = model.text
+        messageLabel.text = model.content
+        dateLabel.textColor = currentTheme.colors.secondaryFontColor
+        dateLabel.text = model.created
     }
 }

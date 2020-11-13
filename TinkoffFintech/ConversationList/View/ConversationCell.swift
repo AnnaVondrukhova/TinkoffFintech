@@ -69,42 +69,37 @@ class ConversationCell: UITableViewCell, ConfigurableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        avatarView.layer.cornerRadius = avatarView.frame.height/2
+        avatarView.layer.cornerRadius = avatarView.frame.height / 2
     }
     
-    func setUpAppearance(with model: ConversationCellModel, theme: Theme) {
-        if model.isOnline {
-            bgView.backgroundColor = theme.colors.onlineConversationColor
-        } else {
-            bgView.backgroundColor = theme.colors.backgroundColor
-        }
-        
+    func setUpAppearance(with model: ConversationCellModel, theme: Theme) {        
         nameLabel.textColor = theme.colors.baseFontColor
         dateLabel.textColor = theme.colors.secondaryFontColor
         messageLabel.textColor = theme.colors.secondaryFontColor
     }
     
     func configure(with model: ConversationCellModel) {
-    
-        avatarView.configure(name: model.name, fontSize: Constants.contactAvatarFontSize, cornerRadius: avatarView.layer.cornerRadius)
+        avatarView.configure(name: model.name, fontSize: Constants.contactAvatarFontSize, cornerRadius: avatarView.frame.height / 2)
         nameLabel.text = model.name
         
-        if calendar.isDateInToday(model.date) {
-            dateFormatter.dateFormat = "HH:mm"
-        } else {
-            dateFormatter.dateFormat = "dd MMM"
-        }
-        dateLabel.text = model.message.isEmpty ? "" : dateFormatter.string(from: model.date)
-        
-        messageLabel.text = model.message.isEmpty ? "No messages yet" : model.message
-        if model.message.isEmpty {
-            messageLabel.font = UIFont.italicSystemFont(ofSize: 13)
-        } else {
-            if model.hasUnreadMessages {
-                messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        if let lastActivity = model.date {
+            if calendar.isDateInToday(lastActivity) {
+                dateFormatter.dateFormat = "HH:mm"
             } else {
-                messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+                dateFormatter.dateFormat = "dd MMM"
             }
+            
+            dateLabel.text = dateFormatter.string(from: lastActivity)
+        } else {
+            dateLabel.text = ""
+        }
+        
+        if let lastMessage = model.message {
+            messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+            messageLabel.text = lastMessage
+        } else {
+            messageLabel.font = UIFont.italicSystemFont(ofSize: 13)
+            messageLabel.text = "No messages yet"
         }
     }
     
@@ -123,9 +118,9 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         bgView.addSubview(dateLabel)
         bgView.addSubview(messageLabel)
         
-        avatarView.topAnchor.constraint(equalTo: bgView.topAnchor, constant: 20).isActive = true
+        avatarView.centerYAnchor.constraint(equalTo: bgView.centerYAnchor).isActive = true
         avatarView.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: 16).isActive = true
-        avatarView.bottomAnchor.constraint(equalTo: bgView.bottomAnchor, constant: -20).isActive = true
+        avatarView.heightAnchor.constraint(equalToConstant: 48).isActive = true
         avatarView.widthAnchor.constraint(equalTo: avatarView.heightAnchor, multiplier: 1.0).isActive = true
         
         nameLabel.topAnchor.constraint(equalTo: bgView.topAnchor, constant: 16).isActive = true
@@ -145,8 +140,4 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         messageLabel.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -16).isActive = true
         messageLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 36).isActive = true
     }
-    
-    
-    
-    
 }

@@ -16,17 +16,17 @@ protocol ViewModelFactory {
 }
 
 struct ConversationViewModelFactory: ViewModelFactory {
-    typealias Model = Conversation
+    typealias Model = Channel
     typealias ViewModel = ConversationCellModel
     
-    static func createViewModel(with model: Conversation) -> ConversationCellModel {
-        let name = model.name.isEmpty ? "No name" : model.name
-        let message = model.messages.last?.text ?? ""
-        let date = Date(timeIntervalSince1970: TimeInterval(model.messages.last?.date ?? Int(Date().timeIntervalSince1970)))
-        let hasUnreadMessages = !(model.messages.last?.isRead ?? true)
+    static func createViewModel(with model: Channel) -> ConversationCellModel {
+        let name = model.name
+        let message = model.lastMessage
+        let date = model.lastActivity
         
-        let conversationCellModel = ConversationCellModel(name: name, message: message, date: date, isOnline: model.isOnline, hasUnreadMessages: hasUnreadMessages)
+        let conversationCellModel = ConversationCellModel(name: name, message: message, date: date)
         
         return conversationCellModel
     }
+    
 }

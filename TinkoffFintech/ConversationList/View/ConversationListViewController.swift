@@ -8,19 +8,11 @@
 
 import UIKit
 
-enum Sections: Int, CaseIterable {
-    case online
-    case history
-}
-
-class ConversationListViewController: UIViewController, ThemesPickerDelegate {
+class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentable {
     
     @IBOutlet var tableView: UITableView!
-    
-    private var onlineConversations = [Conversation]()
-    private var historyConversations = [Conversation]()
-    
-    var updateAppearanceClosure: ((Theme) -> ())? = nil
+
+    var updateAppearanceClosure: ((Theme) -> Void)?
     var currentTheme = ThemeManager.currentTheme {
         didSet {
             updateAppearance(theme: currentTheme)
@@ -28,38 +20,58 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
     }
     
     var user = User()
-    var saveDataManager: SaveDataManager!
+    private var channels = [Channel]()
+    private var saveDataManager: SaveDataManager!
+    private var firebaseManager: FirebaseManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(Constants.senderId)
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        onlineConversations = TestData().conversations.filter({ $0.isOnline == true})
-        historyConversations = TestData().conversations.filter({ ($0.isOnline == false)&&(!$0.messages.isEmpty)})
+        currentTheme = ThemeManager.currentTheme
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
         
         self.updateAppearanceClosure = { [weak self] theme in
             self?.currentTheme = theme
         }
         
+        firebaseManager = FirebaseManager()
+        
         //загрузка данных через GCD
         saveDataManager = GCDDataManager()
-                
         //загрузка данных через Operation
 //        saveDataManager = OperationDataManager()
-        
         saveDataManager.loadData { (name, _, photo) in
             DispatchQueue.main.async {
                 self.user.name = name ?? "No name"
+                Constants.senderName = name ?? "No name"
                 self.user.photo = photo
                 
                 self.configureNavigationElements()
             }
         }
         
-        currentTheme = ThemeManager.currentTheme
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
-        tableView.reloadData()
+        firebaseManager.getChannels { (addedChannels, modifiedChannels, removedChannelsIDs) in
+            for channel in addedChannels {
+                self.channels.append(channel)
+            }
+            for channel in modifiedChannels {
+                if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channel.identifier}) {
+                    self.channels.remove(at: oldChannelIndex)
+                    self.channels.append(channel)
+                }
+            }
+            for channelId in removedChannelsIDs {
+                if let oldChannelIndex = self.channels.firstIndex(where: {$0.identifier == channelId}) {
+                    self.channels.remove(at: oldChannelIndex)
+                }
+            }
+            
+            let currentDate = Date()
+            self.channels.sort { ($0.lastActivity ?? currentDate).compare($1.lastActivity ?? currentDate) == .orderedDescending }
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,17 +90,21 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
         
         let userAvatarView = AvatarView(frame: userButton.frame)
         userAvatarView.backgroundColor = Constants.userPhotoBackgrounColor
-        userAvatarView.layer.cornerRadius = userAvatarView.frame.width/2
-        userAvatarView.configure(image: user.photo, name: user.name, fontSize: Constants.navigationBarAvatarFontSize, cornerRadius: userAvatarView.frame.width/2)
+        userAvatarView.layer.cornerRadius = userAvatarView.frame.width / 2
+        userAvatarView.configure(image: user.photo, name: user.name, fontSize: Constants.navigationBarAvatarFontSize, cornerRadius: userAvatarView.frame.width / 2)
         userAvatarView.isUserInteractionEnabled = true
-        userAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightBarButtonPressed)))
+        userAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileBarButtonPressed)))
         
         userButton.addSubview(userAvatarView)
         
-        let rightBarButton = UIBarButtonItem(customView: userButton)
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        let profileRightBarButton = UIBarButtonItem(customView: userButton)
+        let addChannelRightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChannelBarButtonPressed))
         
-        self.navigationItem.leftBarButtonItem?.image = UIImage(named: "settings")
+        let settingsLeftBarBurron = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(settingsLeftBarButtonPressed))
+        
+        
+        self.navigationItem.leftBarButtonItem = settingsLeftBarBurron
+        self.navigationItem.rightBarButtonItems = [profileRightBarButton, addChannelRightBarButton]
     }
     
     func updateAppearance(theme: Theme) {
@@ -97,7 +113,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
         tableView.reloadData()
     }
     
-    @IBAction func leftBarButtonPressed(_ sender: Any) {
+    @objc func settingsLeftBarButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Themes", bundle: nil)
         guard let themesVC = storyboard.instantiateViewController(withIdentifier: "themesVC") as? ThemesViewController else { return }
         
@@ -108,7 +124,38 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
         navigationController?.pushViewController(themesVC, animated: true)
     }
     
-    @objc func rightBarButtonPressed() {
+    @objc func addChannelBarButtonPressed() {
+        let alertController = UIAlertController(title: "Add channel", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (tf) in
+            tf.placeholder = "Enter hannel name"
+        }
+        
+        let  createAction = UIAlertAction(title: "Create", style: .default) { (_) in
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            if let channelName = alertController.textFields?.first?.text,
+            !channelName.isEmpty {
+                self.firebaseManager.addChannel(name: channelName) { (channelId, error) in
+                    if let channelId = channelId {
+                        guard let channel = Channel(identifier: channelId, dict: ["name": channelName]) else { return }
+                        self.channels.insert(channel, at: 0)
+                        self.tableView.reloadData()
+                    } else {
+                        self.showAlert(title: "Error", message: "Failed to create channel", preferredStyle: .alert, actions: [okAction], completion: nil)
+                    }
+                }
+            } else {
+                self.showAlert(title: "Error", message: "Please enter channel name", preferredStyle: .alert, actions: [okAction], completion: nil)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(createAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func profileBarButtonPressed() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         guard let userDetailsVC = storyboard.instantiateViewController(withIdentifier: "profileVC") as? ProfileViewController else { return }
         userDetailsVC.delegate = self
@@ -119,68 +166,33 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate {
 
 extension ConversationListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Sections.allCases.count
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Sections(rawValue: section) else { return 0 }
-        
-        switch section {
-        case .online:
-            return onlineConversations.count
-        case .history:
-            return historyConversations.count
-        }
+        return channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Sections(rawValue: indexPath.section) else { return ConversationCell() }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell") as? ConversationCell else { return ConversationCell() }
-        let model: ConversationCellModel
-        
-        switch section {
-        case .online:
-            model = ConversationViewModelFactory.createViewModel(with: onlineConversations[indexPath.row])
-        case .history:
-            model = ConversationViewModelFactory.createViewModel(with: historyConversations[indexPath.row])
-        }
+        let model = ConversationViewModelFactory.createViewModel(with: channels[indexPath.row])
 
         cell.setUpAppearance(with: model, theme: currentTheme)
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
         cell.configure(with: model)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = Sections(rawValue: indexPath.section) else { return }
         let storyboard = UIStoryboard(name: "Conversation", bundle: nil)
         guard let conversationVC = storyboard.instantiateViewController(withIdentifier: "conversationVC") as? ConversationViewController else { return }
         
-        switch section {
-        case .online:
-            conversationVC.conversation = onlineConversations[indexPath.row]
-        case .history:
-            conversationVC.conversation = historyConversations[indexPath.row]
-        }
-        
+        conversationVC.channel = channels[indexPath.row]
         navigationController?.pushViewController(conversationVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 89
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = Sections(rawValue: section) else { return nil }
-        
-        switch section {
-        case .online:
-            return "Online"
-        case .history:
-            return "History"
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
     }
 }

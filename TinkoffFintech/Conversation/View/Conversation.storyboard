@@ -15,32 +15,13 @@
                     <view key="view" contentMode="scaleToFill" id="86Y-FH-Ni6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQC-4r-Isp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="788"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="KNv-4z-Dq5" id="lTc-Hv-yBn"/>
-                                    <outlet property="delegate" destination="KNv-4z-Dq5" id="fEG-Od-xgs"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="NQC-4r-Isp" firstAttribute="top" secondItem="BbQ-14-8Gj" secondAttribute="top" id="7Uc-ez-NqR"/>
-                            <constraint firstItem="NQC-4r-Isp" firstAttribute="leading" secondItem="BbQ-14-8Gj" secondAttribute="leading" id="9WU-X5-qUg"/>
-                            <constraint firstItem="BbQ-14-8Gj" firstAttribute="bottom" secondItem="NQC-4r-Isp" secondAttribute="bottom" constant="30" id="TVF-mP-lVk"/>
-                            <constraint firstItem="BbQ-14-8Gj" firstAttribute="trailing" secondItem="NQC-4r-Isp" secondAttribute="trailing" id="m4P-wN-wnH"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="BbQ-14-8Gj"/>
                     </view>
-                    <connections>
-                        <outlet property="tableView" destination="NQC-4r-Isp" id="wUl-ID-o3o"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Xe-Ns-D1j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="153"/>
+            <point key="canvasLocation" x="56.521739130434788" y="152.67857142857142"/>
         </scene>
     </scenes>
 </document>

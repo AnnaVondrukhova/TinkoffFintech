@@ -7,9 +7,20 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct Conversation {
+struct Channel {
+    let identifier: String
     let name: String
-    let messages: [Message]
-    let isOnline: Bool
+    let lastMessage: String?
+    let lastActivity: Date?
+    
+    init? (identifier: String?, dict: [String: Any]) {
+        guard let identifier = identifier,
+            let name = dict["name"] as? String else { return nil }
+        self.identifier = identifier
+        self.name = name
+        self.lastMessage = (dict["lastMessage"] as? String) ?? nil
+        self.lastActivity = (dict["lastActivity"] as? Timestamp)?.dateValue() ?? nil
+    }
 }

@@ -16,7 +16,7 @@ class SaveOperation: Operation {
     var userName: String?
     var userDescription: String?
     var userPhoto: UIImage?
-    var savedFields: [String:Bool] = ["name": false,
+    var savedFields: [String: Bool] = ["name": false,
                                       "description": false,
                                       "photo": false]
     var fails = [String]()
@@ -43,7 +43,6 @@ class SaveOperation: Operation {
         saveData()
     }
 
-    
     func saveData() {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         
@@ -51,6 +50,7 @@ class SaveOperation: Operation {
             do {
                 try name.write(to: directory.appendingPathComponent(self.nameFilename), atomically: true, encoding: .utf8)
                 savedFields["name"] = true
+                Constants.senderName = name
                 print("saved name")
             } catch {
                 fails.append("name")
@@ -82,4 +82,3 @@ class SaveOperation: Operation {
         }
     }
 }
-
