@@ -38,6 +38,15 @@
 		C18099B3255DA29C00EB58BA /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B2255DA29C00EB58BA /* ConversationModel.swift */; };
 		C18099B5255E8A3B00EB58BA /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B4255E8A3B00EB58BA /* ProfileModel.swift */; };
 		C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B6255E9DF800EB58BA /* ThemesModel.swift */; };
+		C18099BA255EBD4000EB58BA /* UrlRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099B9255EBD4000EB58BA /* UrlRequest.swift */; };
+		C18099BC25616B8200EB58BA /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099BB25616B8200EB58BA /* RequestManager.swift */; };
+		C18099C22561746F00EB58BA /* ImagePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = C18099C12561746F00EB58BA /* ImagePicker.xib */; };
+		C18099C42561750C00EB58BA /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099C32561750C00EB58BA /* ImagePickerViewController.swift */; };
+		C18099C62561AF4300EB58BA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099C52561AF4300EB58BA /* ImageCell.swift */; };
+		C18099C925625C7F00EB58BA /* AllPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099C825625C7F00EB58BA /* AllPhotosService.swift */; };
+		C18099CB2562664800EB58BA /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CA2562664800EB58BA /* ImagePickerModel.swift */; };
+		C18099CD2562675800EB58BA /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CC2562675800EB58BA /* PhotoService.swift */; };
+		C18099CF25626EAC00EB58BA /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CE25626EAC00EB58BA /* ImageCellModel.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
 		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C19696A9251FDC6E0077BDE8 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */; };
@@ -98,6 +107,15 @@
 		C18099B2255DA29C00EB58BA /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		C18099B4255E8A3B00EB58BA /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		C18099B6255E9DF800EB58BA /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
+		C18099B9255EBD4000EB58BA /* UrlRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequest.swift; sourceTree = "<group>"; };
+		C18099BB25616B8200EB58BA /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		C18099C12561746F00EB58BA /* ImagePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePicker.xib; sourceTree = "<group>"; };
+		C18099C32561750C00EB58BA /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		C18099C52561AF4300EB58BA /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		C18099C825625C7F00EB58BA /* AllPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotosService.swift; sourceTree = "<group>"; };
+		C18099CA2562664800EB58BA /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
+		C18099CC2562675800EB58BA /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		C18099CE25626EAC00EB58BA /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +247,7 @@
 				C178CD7C25226F050007CB77 /* Conversation */,
 				C19696A1251FD7310077BDE8 /* Profile */,
 				C19A38472527364300642E58 /* Themes */,
+				C18099BD256172EF00EB58BA /* ImagePicker */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -268,6 +287,7 @@
 				C18099AB255D1AE900EB58BA /* MessageService */,
 				C180997A2559770100EB58BA /* SaveToFileService */,
 				C19A3851252738E200642E58 /* ThemeService.swift */,
+				C18099C725625C3400EB58BA /* PhotosService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -279,6 +299,7 @@
 				C1FA15D02539C32100CE86E7 /* FirebaseManager.swift */,
 				C1FA15DE25486BE700CE86E7 /* CoreDataManager.swift */,
 				C1809990255AE79500EB58BA /* FetchManager.swift */,
+				C18099B8255EB48300EB58BA /* NetworkManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -336,6 +357,60 @@
 				C18099AE255D1DE400EB58BA /* MessagesFetchedResultsService.swift */,
 			);
 			path = MessageService;
+			sourceTree = "<group>";
+		};
+		C18099B8255EB48300EB58BA /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				C18099B9255EBD4000EB58BA /* UrlRequest.swift */,
+				C18099BB25616B8200EB58BA /* RequestManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		C18099BD256172EF00EB58BA /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				C18099BE2561730600EB58BA /* Model */,
+				C18099BF2561730D00EB58BA /* View */,
+				C18099C0256173C600EB58BA /* Controller */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		C18099BE2561730600EB58BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C18099CA2562664800EB58BA /* ImagePickerModel.swift */,
+				C18099CE25626EAC00EB58BA /* ImageCellModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C18099BF2561730D00EB58BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C18099C12561746F00EB58BA /* ImagePicker.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C18099C0256173C600EB58BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C18099C32561750C00EB58BA /* ImagePickerViewController.swift */,
+				C18099C52561AF4300EB58BA /* ImageCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C18099C725625C3400EB58BA /* PhotosService */ = {
+			isa = PBXGroup;
+			children = (
+				C18099C825625C7F00EB58BA /* AllPhotosService.swift */,
+				C18099CC2562675800EB58BA /* PhotoService.swift */,
+			);
+			path = PhotosService;
 			sourceTree = "<group>";
 		};
 		C196961625194F050077BDE8 /* Resources */ = {
@@ -564,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1CD1DC2250C02CF00568705 /* LaunchScreen.storyboard in Resources */,
+				C18099C22561746F00EB58BA /* ImagePicker.xib in Resources */,
 				C180999C255BCE6900EB58BA /* Themes.xib in Resources */,
 				C1CD1DBF250C02CF00568705 /* Assets.xcassets in Resources */,
 				C18099A0255BEA9800EB58BA /* Conversation.xib in Resources */,
@@ -642,6 +718,7 @@
 				C178CD8925227A990007CB77 /* ReceivedMessageCell.swift in Sources */,
 				C19A384F252737B700642E58 /* Colors.swift in Sources */,
 				C19A384C252736A600642E58 /* ThemesViewController.swift in Sources */,
+				C18099C42561750C00EB58BA /* ImagePickerViewController.swift in Sources */,
 				C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */,
 				C1CD1DBA250C02CC00568705 /* ProfileViewController.swift in Sources */,
 				C1FA15AA2537628300CE86E7 /* LoadOperation.swift in Sources */,
@@ -659,10 +736,13 @@
 				C19696B4252069A30077BDE8 /* AvatarView.swift in Sources */,
 				C180993B2548B91E00EB58BA /* MessageDB+CoreDataClass.swift in Sources */,
 				C180999E255BE8D500EB58BA /* ConversationView.swift in Sources */,
+				C18099C925625C7F00EB58BA /* AllPhotosService.swift in Sources */,
 				C19A384425232D7600642E58 /* Constants.swift in Sources */,
 				C196961C2519CA970077BDE8 /* AlertService.swift in Sources */,
 				C18099402548B94700EB58BA /* ChannelDB+CoreDataProperties.swift in Sources */,
 				C1969613251947E30077BDE8 /* User.swift in Sources */,
+				C18099C62561AF4300EB58BA /* ImageCell.swift in Sources */,
+				C18099CB2562664800EB58BA /* ImagePickerModel.swift in Sources */,
 				C180998025597C5300EB58BA /* ServiceAssembly.swift in Sources */,
 				C18099A9255C102A00EB58BA /* ChannelsFetchedResultsService.swift in Sources */,
 				C18099AD255D1C8800EB58BA /* MessageDataProvider.swift in Sources */,
@@ -670,8 +750,10 @@
 				C1809985255A9D6E00EB58BA /* SaveToFileManager.swift in Sources */,
 				C178CD8725227A720007CB77 /* SentMessageCell.swift in Sources */,
 				C1809991255AE79500EB58BA /* FetchManager.swift in Sources */,
+				C18099CF25626EAC00EB58BA /* ImageCellModel.swift in Sources */,
 				C19A3852252738E200642E58 /* ThemeService.swift in Sources */,
 				C1FA15D12539C32100CE86E7 /* FirebaseManager.swift in Sources */,
+				C18099BA255EBD4000EB58BA /* UrlRequest.swift in Sources */,
 				C18099B1255D61A700EB58BA /* ConversationListModel.swift in Sources */,
 				C1FA15A62535B87D00CE86E7 /* OperationFileService.swift in Sources */,
 				C180998B255AE3B500EB58BA /* HelperFunctions.swift in Sources */,
@@ -679,7 +761,9 @@
 				C18099B5255E8A3B00EB58BA /* ProfileModel.swift in Sources */,
 				C18099A4255BF48A00EB58BA /* ProfileView.swift in Sources */,
 				C1809989255AC8FB00EB58BA /* MessagesService.swift in Sources */,
+				C18099CD2562675800EB58BA /* PhotoService.swift in Sources */,
 				C1809982255981E700EB58BA /* ChannelsService.swift in Sources */,
+				C18099BC25616B8200EB58BA /* RequestManager.swift in Sources */,
 				C1FA15A42533201500CE86E7 /* GCDFileService.swift in Sources */,
 				C18099B3255DA29C00EB58BA /* ConversationModel.swift in Sources */,
 				C18099752559265B00EB58BA /* PresentationAssembly.swift in Sources */,
