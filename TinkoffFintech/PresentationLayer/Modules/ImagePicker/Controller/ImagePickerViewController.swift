@@ -11,6 +11,7 @@ import UIKit
 class ImagePickerViewController: UIViewController, ImagePickerModelDelegate, AlertPresentableProtocol {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var closeButton: UIBarButtonItem!
     
     var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -52,6 +53,7 @@ class ImagePickerViewController: UIViewController, ImagePickerModelDelegate, Ale
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
 
         setLayout()
+        closeButton.tintColor = .systemBlue
         setUpActivityIndicator()
         activityIndicator.startAnimating()
         print("loading photos")
@@ -76,9 +78,14 @@ class ImagePickerViewController: UIViewController, ImagePickerModelDelegate, Ale
         activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     }
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
-extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos?.count ?? 0
     }

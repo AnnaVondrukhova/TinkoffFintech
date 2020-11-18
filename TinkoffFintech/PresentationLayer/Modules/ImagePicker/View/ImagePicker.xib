@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImagePickerViewController" customModule="TinkoffFintech" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="48c-S0-Ko4" id="R8b-87-D9b"/>
                 <outlet property="collectionView" destination="Sys-as-PCQ" id="3ro-gQ-d1C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="zNj-v6-CeJ"/>
             </connections>
@@ -20,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Sys-as-PCQ">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hfo-cD-G3p">
                         <size key="itemSize" width="128" height="128"/>
@@ -33,13 +34,28 @@
                         <outlet property="delegate" destination="-1" id="Z68-a5-b2i"/>
                     </connections>
                 </collectionView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS3-72-gY3">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem id="XFP-jv-Y6K">
+                            <barButtonItem key="leftBarButtonItem" title="Close" id="48c-S0-Ko4">
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="-1" id="EFO-4s-H13"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="Sys-as-PCQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8aU-hP-YWg"/>
-                <constraint firstItem="Sys-as-PCQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="P3M-Fo-8iO"/>
+                <constraint firstItem="jS3-72-gY3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LBL-01-WNB"/>
+                <constraint firstItem="jS3-72-gY3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="M9E-tU-mCW"/>
+                <constraint firstItem="Sys-as-PCQ" firstAttribute="top" secondItem="jS3-72-gY3" secondAttribute="bottom" id="P3M-Fo-8iO"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Sys-as-PCQ" secondAttribute="trailing" id="fhK-R2-ttU"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Sys-as-PCQ" secondAttribute="bottom" id="p3b-Uj-dRp"/>
+                <constraint firstItem="jS3-72-gY3" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="pFe-k2-zFP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="133"/>
