@@ -22,7 +22,15 @@ protocol ImagePickerDelegate {
 class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInfoDelegate {
 
     @IBOutlet var backgroundView: ProfileView!
-    @IBOutlet var editBarButton: UIBarButtonItem!
+    @IBOutlet var editBarButton: UIBarButtonItem! {
+        didSet {
+            let customView = UIButton()
+            customView.setTitle("Edit", for: .normal)
+            customView.setTitleColor(.systemBlue, for: .normal)
+            customView.addTarget(self, action: #selector(editBarButtonPressed(_:)), for: .touchUpInside)
+            editBarButton.customView = customView
+        }
+    }
     @IBOutlet var closeBarButton: UIBarButtonItem!
     
     var activityIndicator: UIActivityIndicatorView = {
@@ -130,6 +138,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         
         editBarButton.title = "Edit"
         backgroundView.setElementsDeselected()
+        stopAnimation()
         
         compareFields()
     }
@@ -173,18 +182,66 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
                        completion: nil)
     }
     
-    @IBAction func editBarButtonPressed(_ sender: Any) {
+    @objc func editBarButtonPressed(_ sender: Any) {
         isEditingProfile.toggle()
         
         if isEditingProfile {
-            editBarButton.title = "Done"
-            
+            addBUttonAnimation()
             backgroundView.setElementsSelected()
         } else {
-            editBarButton.title = "Edit"
             backgroundView.setElementsDeselected()
+            stopAnimation()
             
             compareFields()
+        }
+    }
+    
+    func addBUttonAnimation() {
+        if let customView = editBarButton.customView {
+            let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            let initialRotation = NSNumber(value: 0.0)
+            let rotationLeft = NSNumber(value: Double.pi * 0.1)
+            let rotationRight = NSNumber(value: Double.pi * -0.1)
+            rotation.values = [initialRotation, rotationRight, initialRotation, rotationLeft, initialRotation]
+            rotation.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let upDown = CAKeyframeAnimation(keyPath: "position.y")
+            let initialVertical = NSNumber(value: Int(customView.center.y))
+            let up = NSNumber(value: Int(customView.center.y) + 5)
+            let down = NSNumber(value: Int(customView.center.y) - 5)
+            upDown.values = [initialVertical, up, initialVertical, down, initialVertical]
+            upDown.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let leftRight = CAKeyframeAnimation(keyPath: "position.x")
+            let initialHorizontal = NSNumber(value: Int(customView.center.x))
+            let left = NSNumber(value: Int(customView.center.x) - 5)
+            let right = NSNumber(value: Int(customView.center.x) + 5)
+            leftRight.values = [initialHorizontal, left, initialHorizontal, right, initialHorizontal]
+            leftRight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let group = CAAnimationGroup()
+            group.animations = [rotation, upDown, leftRight]
+            group.duration = 0.3
+            group.repeatCount = .infinity
+            customView.layer.add(group, forKey: "nil")
+        }
+    }
+    
+    func stopAnimation() {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            self.editBarButton.customView?.layer.removeAllAnimations()
+        })
+        
+        if let customView = editBarButton.customView {
+            
+            let move = CABasicAnimation(keyPath: "position")
+            move.fromValue = customView.layer.presentation()?.position
+            move.toValue = customView.center
+            move.duration = 0.3
+            customView.layer.add(move, forKey: "return")
+            
+            CATransaction.commit()
         }
     }
     
