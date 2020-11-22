@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITextViewDelegate, AlertPresentableProtocol, MessagesFetchedResultsServiceDelegate {
+class ConversationViewController: UIViewController, UITextViewDelegate, AlertPresentableProtocol, MessagesFetchedResultsServiceDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet var conversationView: ConversationView!
     
@@ -46,8 +46,8 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        conversationView.tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-        conversationView.sendButton.addTarget(self, action: #selector(sendButtonPressed(_:)), for: .touchUpInside)
+        
+        addSelectors()
         
         model.makeFetchedResultsController(channelIdentifier: channel?.identifier)
         model.getMessages(channelId: channel?.identifier)
@@ -65,6 +65,23 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         super.viewDidLayoutSubviews()
         
         self.view.backgroundColor = currentTheme.colors.backgroundColor
+    }
+    
+    func addSelectors() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        pan.cancelsTouchesInView = false
+        pan.delegate = self
+        
+        let touchDown = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        touchDown.minimumPressDuration = 0
+        touchDown.cancelsTouchesInView = false
+        touchDown.delegate = self
+        
+        conversationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        conversationView.addGestureRecognizer(pan)
+        conversationView.addGestureRecognizer(touchDown)
+        
+        conversationView.sendButton.addTarget(self, action: #selector(sendButtonPressed(_:)), for: .touchUpInside)
     }
     
     func setUpUppearance() {
@@ -152,5 +169,50 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         conversationView.sendTextView.text = ""
         textHeightConstraint.constant = 36
         conversationView.placeholderLabel.isHidden = false
+    }
+    
+    // MARK: Emitter
+    lazy var particleEmitter: CAEmitterLayer = {
+        let emitter = CAEmitterLayer()
+        emitter.emitterShape = .point
+        emitter.renderMode = .additive
+        return emitter
+    }()
+    
+    let tinkoffCell = TinkoffCell()
+    
+    func showParticles() {
+        particleEmitter.emitterCells = [tinkoffCell]
+        self.view.layer.addSublayer(particleEmitter)
+    }
+    
+    @objc func handleTap(_ sender: UILongPressGestureRecognizer) {
+        particleEmitter.emitterPosition = sender.location(in: self.view)
+        
+        if sender.state == .began {
+            showParticles()
+            particleEmitter.birthRate = 1.0
+        } else if sender.state == .ended {
+            Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(stopEmission), userInfo: nil, repeats: false)
+        }
+    }
+    
+    @objc func stopEmission() {
+        particleEmitter.birthRate = 0
+    }
+    
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+        particleEmitter.emitterPosition = sender.location(in: self.view)
+        
+        if sender.state == .began {
+            showParticles()
+            particleEmitter.birthRate = 1.0
+        } else if sender.state == .ended {
+            particleEmitter.birthRate = 0
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

@@ -186,7 +186,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         isEditingProfile.toggle()
         
         if isEditingProfile {
-            addBUttonAnimation()
+            addButtonAnimation()
             backgroundView.setElementsSelected()
         } else {
             backgroundView.setElementsDeselected()
@@ -196,7 +196,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         }
     }
     
-    func addBUttonAnimation() {
+    func addButtonAnimation() {
         if let customView = editBarButton.customView {
             let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
             let initialRotation = NSNumber(value: 0.0)

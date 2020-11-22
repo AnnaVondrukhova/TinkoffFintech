@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C14F87952569888100993992 /* TinkoffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F87942569888100993992 /* TinkoffCell.swift */; };
 		C178CD83252270C80007CB77 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD82252270C80007CB77 /* ConversationViewController.swift */; };
 		C178CD8725227A720007CB77 /* SentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD8625227A720007CB77 /* SentMessageCell.swift */; };
 		C178CD8925227A990007CB77 /* ReceivedMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD8825227A990007CB77 /* ReceivedMessageCell.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.debug.xcconfig"; sourceTree = "<group>"; };
+		C14F87942569888100993992 /* TinkoffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffCell.swift; sourceTree = "<group>"; };
 		C178CD82252270C80007CB77 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		C178CD8625227A720007CB77 /* SentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageCell.swift; sourceTree = "<group>"; };
 		C178CD8825227A990007CB77 /* ReceivedMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageCell.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				C1FA159C252C644300CE86E7 /* MessageCellModel.swift */,
 				C18099B2255DA29C00EB58BA /* ConversationModel.swift */,
+				C14F87942569888100993992 /* TinkoffCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				C19A384F252737B700642E58 /* Colors.swift in Sources */,
 				C19A384C252736A600642E58 /* ThemesViewController.swift in Sources */,
 				C18099C42561750C00EB58BA /* ImagePickerViewController.swift in Sources */,
+				C14F87952569888100993992 /* TinkoffCell.swift in Sources */,
 				C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */,
 				C1CD1DBA250C02CC00568705 /* ProfileViewController.swift in Sources */,
 				C1FA15AA2537628300CE86E7 /* LoadOperation.swift in Sources */,
