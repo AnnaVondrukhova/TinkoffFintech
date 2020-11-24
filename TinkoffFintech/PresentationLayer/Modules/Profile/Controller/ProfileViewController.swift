@@ -19,19 +19,32 @@ protocol ImagePickerDelegate {
     func stopWaiting()
 }
 
-class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInfoDelegate {
+class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInfoDelegate, UIGestureRecognizerDelegate {
 
+    @IBOutlet var backgroundColorView: UIView!
     @IBOutlet var backgroundView: ProfileView!
+    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var editBarButton: UIBarButtonItem! {
         didSet {
             let customView = UIButton()
             customView.setTitle("Edit", for: .normal)
             customView.setTitleColor(.systemBlue, for: .normal)
             customView.addTarget(self, action: #selector(editBarButtonPressed(_:)), for: .touchUpInside)
+            customView.alpha = 0.0
             editBarButton.customView = customView
         }
     }
-    @IBOutlet var closeBarButton: UIBarButtonItem!
+    
+    @IBOutlet var closeBarButton: UIBarButtonItem! {
+        didSet {
+            let customView = UIButton()
+            customView.setTitle("Close", for: .normal)
+            customView.setTitleColor(.systemBlue, for: .normal)
+            customView.addTarget(self, action: #selector(closeBarButtonPressed(_:)), for: .touchUpInside)
+            customView.alpha = 0.0
+            closeBarButton.customView = customView
+        }
+    }
     
     var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -48,6 +61,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
     var currentTheme: Theme
     private let presentationAssembly: PresentationAssemblyProtocol
     private let model: ProfileModelProtocol
+    private var emitter: EmitterAnimationService?
     
     var user = User()
     var delegate: ConversationListViewController!
@@ -70,12 +84,14 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emitter = EmitterAnimationService(vc: self)
+        
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
         navigationController?.isNavigationBarHidden = false
         
-        setUpSelectors()
+        addSelectors()
         setColors()
         setUpActivityIndicator()
         
@@ -88,9 +104,20 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
             
             self.backgroundView.configureAvatarView(with: self.user)
         }
+        
+//        closeBarButton.tintColor = UIColor.systemBlue.withAlphaComponent(0.0)
+//        editBarButton.tintColor = UIColor.systemBlue.withAlphaComponent(0.0)
+        backgroundView.nameTextField.alpha = 0.0
+        backgroundView.descriptionTextView.alpha = 0.0
     }
     
-    func setUpSelectors() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        animateUIElementsAppear()
+    }
+    
+    func addSelectors() {
         backgroundView.avatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector (avatarTapped(_:))))
         backgroundView.saveWithGCDButton.addTarget(self, action: #selector(saveButtonPressed(_:)), for: .touchUpInside)
         backgroundView.saveWithOperationButton.addTarget(self, action: #selector(saveButtonPressed(_:)), for: .touchUpInside)
@@ -98,13 +125,25 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        pan.cancelsTouchesInView = false
+        pan.delegate = self
+        
+        let touchDown = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        touchDown.minimumPressDuration = 0
+        touchDown.cancelsTouchesInView = false
+        touchDown.delegate = self
+        
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        backgroundView.addGestureRecognizer(touchDown)
+        backgroundView.addGestureRecognizer(pan)
     }
     
     func setColors() {
         editBarButton.tintColor = .systemBlue
         closeBarButton.tintColor = .systemBlue
         
+        backgroundColorView.backgroundColor = currentTheme.colors.UIElementColor
         backgroundView.setColors(theme: currentTheme)
     }
     
@@ -138,7 +177,7 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         
         editBarButton.title = "Edit"
         backgroundView.setElementsDeselected()
-        stopAnimation()
+        stopEditBarButtonAnimation()
         
         compareFields()
     }
@@ -186,66 +225,17 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
         isEditingProfile.toggle()
         
         if isEditingProfile {
-            addButtonAnimation()
+            addEditBarButtonAnimation()
             backgroundView.setElementsSelected()
         } else {
             backgroundView.setElementsDeselected()
-            stopAnimation()
+            stopEditBarButtonAnimation()
             
             compareFields()
         }
     }
     
-    func addButtonAnimation() {
-        if let customView = editBarButton.customView {
-            let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
-            let initialRotation = NSNumber(value: 0.0)
-            let rotationLeft = NSNumber(value: Double.pi * 0.1)
-            let rotationRight = NSNumber(value: Double.pi * -0.1)
-            rotation.values = [initialRotation, rotationRight, initialRotation, rotationLeft, initialRotation]
-            rotation.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
-            
-            let upDown = CAKeyframeAnimation(keyPath: "position.y")
-            let initialVertical = NSNumber(value: Int(customView.center.y))
-            let up = NSNumber(value: Int(customView.center.y) + 5)
-            let down = NSNumber(value: Int(customView.center.y) - 5)
-            upDown.values = [initialVertical, up, initialVertical, down, initialVertical]
-            upDown.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
-            
-            let leftRight = CAKeyframeAnimation(keyPath: "position.x")
-            let initialHorizontal = NSNumber(value: Int(customView.center.x))
-            let left = NSNumber(value: Int(customView.center.x) - 5)
-            let right = NSNumber(value: Int(customView.center.x) + 5)
-            leftRight.values = [initialHorizontal, left, initialHorizontal, right, initialHorizontal]
-            leftRight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
-            
-            let group = CAAnimationGroup()
-            group.animations = [rotation, upDown, leftRight]
-            group.duration = 0.3
-            group.repeatCount = .infinity
-            customView.layer.add(group, forKey: "nil")
-        }
-    }
-    
-    func stopAnimation() {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
-            self.editBarButton.customView?.layer.removeAllAnimations()
-        })
-        
-        if let customView = editBarButton.customView {
-            
-            let move = CABasicAnimation(keyPath: "position")
-            move.fromValue = customView.layer.presentation()?.position
-            move.toValue = customView.center
-            move.duration = 0.3
-            customView.layer.add(move, forKey: "return")
-            
-            CATransaction.commit()
-        }
-    }
-    
-    @IBAction func closeBarButtonPressed(_ sender: Any) {
+    @objc func closeBarButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -310,6 +300,78 @@ class ProfileViewController: UIViewController, AlertPresentableProtocol, UserInf
             self.showAlert(title: "Error", message: "Failed to save \(message)", preferredStyle: .alert, actions: [okAction, repeatAction], completion: nil)
         }
         self.backgroundView.isUserInteractionEnabled = true
+    }
+    
+    // MARK: Emitter
+    @objc func handleTap(_ sender: UILongPressGestureRecognizer) {
+        emitter?.handleTap(sender)
+    }
+
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+        emitter?.handlePan(sender)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    // MARK: Animation
+    func animateUIElementsAppear() {
+        UIView.animate(withDuration: 0.3) {
+            self.closeBarButton.customView?.alpha = 1.0
+            self.editBarButton.customView?.alpha = 1.0
+            self.backgroundView.nameTextField.alpha = 1.0
+            self.backgroundView.descriptionTextView.alpha = 1.0
+        }
+    }
+    
+    func addEditBarButtonAnimation() {
+        if let customView = editBarButton.customView {
+            let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            let initialRotation = NSNumber(value: 0.0)
+            let rotationLeft = NSNumber(value: Double.pi * 0.1)
+            let rotationRight = NSNumber(value: Double.pi * -0.1)
+            rotation.values = [initialRotation, rotationRight, initialRotation, rotationLeft, initialRotation]
+            rotation.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let upDown = CAKeyframeAnimation(keyPath: "position.y")
+            let initialVertical = NSNumber(value: Int(customView.center.y))
+            let up = NSNumber(value: Int(customView.center.y) + 5)
+            let down = NSNumber(value: Int(customView.center.y) - 5)
+            upDown.values = [initialVertical, up, initialVertical, down, initialVertical]
+            upDown.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let leftRight = CAKeyframeAnimation(keyPath: "position.x")
+            let initialHorizontal = NSNumber(value: Int(customView.center.x))
+            let left = NSNumber(value: Int(customView.center.x) - 5)
+            let right = NSNumber(value: Int(customView.center.x) + 5)
+            leftRight.values = [initialHorizontal, left, initialHorizontal, right, initialHorizontal]
+            leftRight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            
+            let group = CAAnimationGroup()
+            group.animations = [rotation, upDown, leftRight]
+            group.duration = 0.3
+            group.repeatCount = .infinity
+            customView.layer.add(group, forKey: "nil")
+        }
+    }
+    
+    func stopEditBarButtonAnimation() {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            self.editBarButton.customView?.layer.removeAllAnimations()
+        })
+        
+        if let customView = editBarButton.customView {
+            
+            let move = CABasicAnimation(keyPath: "position")
+            move.fromValue = customView.layer.presentation()?.position
+            move.toValue = customView.center
+            move.duration = 0.3
+            customView.layer.add(move, forKey: "return")
+            
+            CATransaction.commit()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

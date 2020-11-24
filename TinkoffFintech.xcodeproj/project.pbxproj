@@ -48,6 +48,8 @@
 		C18099CB2562664800EB58BA /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CA2562664800EB58BA /* ImagePickerModel.swift */; };
 		C18099CD2562675800EB58BA /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CC2562675800EB58BA /* PhotoService.swift */; };
 		C18099CF25626EAC00EB58BA /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CE25626EAC00EB58BA /* ImageCellModel.swift */; };
+		C18A66E2256D781500BFEE32 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E1256D781500BFEE32 /* Animator.swift */; };
+		C18A66E6256D84DD00BFEE32 /* EmitterAnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
 		C196961C2519CA970077BDE8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C196961B2519CA970077BDE8 /* AlertService.swift */; };
 		C19696A9251FDC6E0077BDE8 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */; };
@@ -118,6 +120,8 @@
 		C18099CA2562664800EB58BA /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		C18099CC2562675800EB58BA /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		C18099CE25626EAC00EB58BA /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
+		C18A66E1256D781500BFEE32 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterAnimationService.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C196961B2519CA970077BDE8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		C19696A8251FDC6E0077BDE8 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 				C180997A2559770100EB58BA /* SaveToFileService */,
 				C19A3851252738E200642E58 /* ThemeService.swift */,
 				C18099C725625C3400EB58BA /* PhotosService */,
+				C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 			children = (
 				C1FA159E252C649600CE86E7 /* ConversationCellModel.swift */,
 				C18099B0255D61A700EB58BA /* ConversationListModel.swift */,
+				C18A66E1256D781500BFEE32 /* Animator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -722,6 +728,7 @@
 				C19A384F252737B700642E58 /* Colors.swift in Sources */,
 				C19A384C252736A600642E58 /* ThemesViewController.swift in Sources */,
 				C18099C42561750C00EB58BA /* ImagePickerViewController.swift in Sources */,
+				C18A66E2256D781500BFEE32 /* Animator.swift in Sources */,
 				C14F87952569888100993992 /* TinkoffCell.swift in Sources */,
 				C18099B7255E9DF800EB58BA /* ThemesModel.swift in Sources */,
 				C1CD1DBA250C02CC00568705 /* ProfileViewController.swift in Sources */,
@@ -759,6 +766,7 @@
 				C1FA15D12539C32100CE86E7 /* FirebaseManager.swift in Sources */,
 				C18099BA255EBD4000EB58BA /* UrlRequest.swift in Sources */,
 				C18099B1255D61A700EB58BA /* ConversationListModel.swift in Sources */,
+				C18A66E6256D84DD00BFEE32 /* EmitterAnimationService.swift in Sources */,
 				C1FA15A62535B87D00CE86E7 /* OperationFileService.swift in Sources */,
 				C180998B255AE3B500EB58BA /* HelperFunctions.swift in Sources */,
 				C19696B1252068650077BDE8 /* ConversationCell.swift in Sources */,

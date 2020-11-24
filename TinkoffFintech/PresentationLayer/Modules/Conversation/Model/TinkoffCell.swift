@@ -20,7 +20,7 @@ class TinkoffCell: CAEmitterCell {
         self.emissionRange = .pi
         self.spinRange = 10
         self.scale = 0.05
-        self.scaleRange = 0.25
+        self.scaleRange = 0.1
         self.alphaSpeed = -1
         self.contents = UIImage(named: "tinkoffLogo")?.cgImage
     }

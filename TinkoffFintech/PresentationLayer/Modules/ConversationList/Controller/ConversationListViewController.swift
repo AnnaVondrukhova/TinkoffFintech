@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentableProtocol, ChannelsFetchedResultsServiceDelegate, UserInfoDelegate {
+class ConversationListViewController: UIViewController, ThemesPickerDelegate, AlertPresentableProtocol,
+                                      ChannelsFetchedResultsServiceDelegate, UserInfoDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -18,10 +19,12 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
             updateAppearance(theme: currentTheme)
         }
     }
+    var userAvatarViewSnaphot: UIView?
     
     var user = User()
     private let presentationAssembly: PresentationAssemblyProtocol
-    private let model: ConversationListModelProtocol
+    private var model: ConversationListModelProtocol
+    private var emitter: EmitterAnimationService?
     
     init(presentationAssembly: PresentationAssemblyProtocol,
          model: ConversationListModelProtocol) {
@@ -44,12 +47,16 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        emitter = EmitterAnimationService(vc: self)
+        
         tableView.register(ConversationCell.self, forCellReuseIdentifier: "conversationCell")
         tableView.delegate = model.dataProvider
         tableView.dataSource = model.dataProvider
         NotificationCenter.default.addObserver(self, selector: #selector(showMessages(withNotification:)),
                                                name: NSNotification.Name(rawValue: "DidSelectRow notification"),
                                                object: nil)
+        
+        addSelectors()
         
         self.updateAppearanceClosure = { [weak self] theme in
             self?.currentTheme = theme
@@ -84,6 +91,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         userAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileBarButtonPressed)))
         
         userButton.addSubview(userAvatarView)
+        userAvatarViewSnaphot = userAvatarView.snapshotView(afterScreenUpdates: true)
         
         let profileRightBarButton = UIBarButtonItem(customView: userButton)
         let addChannelRightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChannelBarButtonPressed))
@@ -98,6 +106,20 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     func updateAppearance(theme: Theme) {
         model.setTheme(theme: theme)
         tableView.reloadData()
+    }
+    
+    func addSelectors() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        pan.cancelsTouchesInView = false
+        pan.delegate = self
+        
+        let touchDown = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        touchDown.minimumPressDuration = 0
+        touchDown.cancelsTouchesInView = false
+        touchDown.delegate = self
+        
+        tableView.addGestureRecognizer(pan)
+        tableView.addGestureRecognizer(touchDown)
     }
     
     @objc func settingsLeftBarButtonPressed(_ sender: Any) {
@@ -131,6 +153,8 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
     @objc func profileBarButtonPressed() {
         let profileVC = presentationAssembly.profileViewController()
         profileVC.delegate = self
+        profileVC.transitioningDelegate = self
+        profileVC.modalPresentationStyle = .fullScreen
         
         present(profileVC, animated: true, completion: nil)
     }
@@ -141,5 +165,31 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         let conversationVC = presentationAssembly.conversatioViewController()
         conversationVC.channel = channel
         navigationController?.pushViewController(conversationVC, animated: true)
+    }
+    
+    // MARK: Emitter
+    @objc func handleTap(_ sender: UILongPressGestureRecognizer) {
+        emitter?.handleTap(sender)
+    }
+
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+        emitter?.handlePan(sender)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+    // MARK: Animation
+extension ConversationListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        guard let conversationListVC = source as? ConversationListViewController,
+                let profileVC = presented as? ProfileViewController,
+                let userAvatarViewSnaphot = userAvatarViewSnaphot else { return nil }
+
+        let animator = Animator(conversationListVC: conversationListVC, profileVC: profileVC, fromViewSnapshot: userAvatarViewSnaphot)
+        return animator
     }
 }

@@ -15,6 +15,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     var channel: ChannelDB?
     var currentTheme: Theme
     private let model: ConversationModelProtocol
+    private var emitter: EmitterAnimationService?
     
     init(model: ConversationModelProtocol) {
         self.model = model
@@ -32,6 +33,8 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emitter = EmitterAnimationService(vc: self)
         
         navigationItem.title = channel?.name
         navigationItem.largeTitleDisplayMode = .never
@@ -161,7 +164,7 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
         conversationView.sendButton.isHidden = true
         
         guard let text = conversationView.sendTextView.text,
-            let channel = self.channel else { return }
+              let channel = self.channel else { return }
         
         print("send text: \(text)")
         model.sendMessage(in: self, channelId: channel.identifier, text: text)
@@ -172,44 +175,12 @@ class ConversationViewController: UIViewController, UITextViewDelegate, AlertPre
     }
     
     // MARK: Emitter
-    lazy var particleEmitter: CAEmitterLayer = {
-        let emitter = CAEmitterLayer()
-        emitter.emitterShape = .point
-        emitter.renderMode = .additive
-        return emitter
-    }()
-    
-    let tinkoffCell = TinkoffCell()
-    
-    func showParticles() {
-        particleEmitter.emitterCells = [tinkoffCell]
-        self.view.layer.addSublayer(particleEmitter)
-    }
-    
     @objc func handleTap(_ sender: UILongPressGestureRecognizer) {
-        particleEmitter.emitterPosition = sender.location(in: self.view)
-        
-        if sender.state == .began {
-            showParticles()
-            particleEmitter.birthRate = 1.0
-        } else if sender.state == .ended {
-            Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(stopEmission), userInfo: nil, repeats: false)
-        }
+        emitter?.handleTap(sender)
     }
-    
-    @objc func stopEmission() {
-        particleEmitter.birthRate = 0
-    }
-    
+
     @objc func handlePan(_ sender: UIPanGestureRecognizer) {
-        particleEmitter.emitterPosition = sender.location(in: self.view)
-        
-        if sender.state == .began {
-            showParticles()
-            particleEmitter.birthRate = 1.0
-        } else if sender.state == .ended {
-            particleEmitter.birthRate = 0
-        }
+        emitter?.handlePan(sender)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
