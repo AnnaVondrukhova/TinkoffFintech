@@ -20,6 +20,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         }
     }
     var userAvatarViewSnaphot: UIView?
+    var navigationBarFrame: CGRect?
     
     var user = User()
     private let presentationAssembly: PresentationAssemblyProtocol
@@ -46,6 +47,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last?.appendingPathComponent("Chat.sqlite") as Any)
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationBarFrame = navigationController?.navigationBar.frame
         
         emitter = EmitterAnimationService(vc: self)
         
@@ -187,9 +189,10 @@ extension ConversationListViewController: UIViewControllerTransitioningDelegate 
         
         guard let conversationListVC = source as? ConversationListViewController,
                 let profileVC = presented as? ProfileViewController,
-                let userAvatarViewSnaphot = userAvatarViewSnaphot else { return nil }
+                let userAvatarViewSnaphot = userAvatarViewSnaphot,
+                let navigationBarFrame = navigationBarFrame else { return nil }
 
-        let animator = Animator(conversationListVC: conversationListVC, profileVC: profileVC, fromViewSnapshot: userAvatarViewSnaphot)
+        let animator = Animator(conversationListVC: conversationListVC, profileVC: profileVC, fromViewSnapshot: userAvatarViewSnaphot, navigationBarFrame: navigationBarFrame)
         return animator
     }
 }

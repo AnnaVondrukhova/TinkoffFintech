@@ -16,12 +16,14 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     private let profileVC: ProfileViewController
     private let fromImageViewSnapshot: UIView
     private let fromImageViewRect: CGRect
+    private let navigationBarFrame: CGRect
     
-    init?(conversationListVC: ConversationListViewController, profileVC: ProfileViewController, fromViewSnapshot: UIView) {
+    init?(conversationListVC: ConversationListViewController, profileVC: ProfileViewController, fromViewSnapshot: UIView, navigationBarFrame: CGRect) {
 //        return nil
         self.conversationListVC = conversationListVC
         self.profileVC = profileVC
         self.fromImageViewSnapshot = fromViewSnapshot
+        self.navigationBarFrame = navigationBarFrame
         
         guard let window = conversationListVC.view.window,
               let userAvatarView = conversationListVC.navigationItem.rightBarButtonItems?[0].customView else { return nil }
@@ -73,7 +75,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         let operationButtonFromFrame = CGRect(x: saveWithOperationButton.center.x, y: saveWithOperationButton.center.y, width: 0, height: 0)
         saveWithOperationButton.frame = operationButtonFromFrame
         containerView.addSubview(saveWithOperationButton)
-
+        
         UIView.animateKeyframes(withDuration: Self.duration,
                                 delay: 0,
                                 options: .calculationModeCubic,
@@ -86,6 +88,9 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                                     }
                                     UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.7) {
                                         navigationBarView.alpha = 1
+                                        navigationBarView.frame = CGRect(x: 0, y: 0,
+                                                                         width: self.navigationBarFrame.width,
+                                                                         height: self.navigationBarFrame.height + self.profileVC.view.safeAreaInsets.top)
                                     }
                                     UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6) {
                                         navigationBar.alpha = 1
@@ -111,7 +116,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     private func calculateAvatarViewFrame() -> CGRect {
         let avatarViewWidth: CGFloat = profileVC.backgroundView.avatarViewWidth
         let avatarViewX: CGFloat = profileVC.view.center.x - avatarViewWidth / 2
-        let avatarViewY: CGFloat = profileVC.view.safeAreaInsets.top + (conversationListVC.navigationController?.navigationBar.frame.height ?? 0) + 7
+        let avatarViewY: CGFloat = profileVC.view.safeAreaInsets.top + navigationBarFrame.height + 7
         return CGRect(x: avatarViewX, y: avatarViewY, width: avatarViewWidth, height: avatarViewWidth)
     }
     
@@ -121,7 +126,6 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         let navigationBarFrame = conversationListVC.navigationController?.navigationBar.frame ?? CGRect()
         let navigationBarViewHeight = profileVC.view.safeAreaInsets.top + navigationBarFrame.height
-        print(navigationBarViewHeight)
         navigationBarView.frame = CGRect(x: 0, y: 0, width: navigationBarFrame.width, height: navigationBarViewHeight)
         
         return navigationBarView
