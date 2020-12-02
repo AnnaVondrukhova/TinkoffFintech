@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C13DCE4B257567AF002122EA /* TinkoffFintechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13DCE4A257567AF002122EA /* TinkoffFintechTests.swift */; };
+		C13DCE5525756B94002122EA /* SaveToFileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13DCE5425756B94002122EA /* SaveToFileManagerMock.swift */; };
 		C14F87952569888100993992 /* TinkoffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F87942569888100993992 /* TinkoffCell.swift */; };
 		C178CD83252270C80007CB77 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD82252270C80007CB77 /* ConversationViewController.swift */; };
 		C178CD8725227A720007CB77 /* SentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C178CD8625227A720007CB77 /* SentMessageCell.swift */; };
@@ -48,6 +50,8 @@
 		C18099CB2562664800EB58BA /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CA2562664800EB58BA /* ImagePickerModel.swift */; };
 		C18099CD2562675800EB58BA /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CC2562675800EB58BA /* PhotoService.swift */; };
 		C18099CF25626EAC00EB58BA /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CE25626EAC00EB58BA /* ImageCellModel.swift */; };
+		C18717082576D117003CDF32 /* RequestManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18717072576D117003CDF32 /* RequestManagerMock.swift */; };
+		C187170C2576D792003CDF32 /* AllPhotosServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187170B2576D792003CDF32 /* AllPhotosServiceMock.swift */; };
 		C18A66E2256D781500BFEE32 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E1256D781500BFEE32 /* Animator.swift */; };
 		C18A66E6256D84DD00BFEE32 /* EmitterAnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
@@ -75,10 +79,31 @@
 		C1FA15DD25486A1400CE86E7 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */; };
 		C1FA15DF25486BE700CE86E7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DE25486BE700CE86E7 /* CoreDataManager.swift */; };
 		F3958D301D7ACA676178EA57 /* Pods_TinkoffFintech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */; };
+		F94EF4CB4FE1DF5FC3D76741 /* Pods_TinkoffFintechTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C13DCE4D257567AF002122EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C1CD1DAA250C02CC00568705 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1CD1DB1250C02CC00568705;
+			remoteInfo = TinkoffFintech;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1E3DD598DC41F4B169FD34FA /* Pods-TinkoffFintechUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8B04B0D3BB203355FE8EDB40 /* Pods_TinkoffFintechUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.debug.xcconfig"; sourceTree = "<group>"; };
+		92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.release.xcconfig"; sourceTree = "<group>"; };
+		A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD60440FB1227A0D5311251D /* Pods-TinkoffFintechUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffFintechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C13DCE4A257567AF002122EA /* TinkoffFintechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffFintechTests.swift; sourceTree = "<group>"; };
+		C13DCE4C257567AF002122EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C13DCE5425756B94002122EA /* SaveToFileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToFileManagerMock.swift; sourceTree = "<group>"; };
 		C14F87942569888100993992 /* TinkoffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffCell.swift; sourceTree = "<group>"; };
 		C178CD82252270C80007CB77 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		C178CD8625227A720007CB77 /* SentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageCell.swift; sourceTree = "<group>"; };
@@ -120,6 +145,8 @@
 		C18099CA2562664800EB58BA /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		C18099CC2562675800EB58BA /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		C18099CE25626EAC00EB58BA /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
+		C18717072576D117003CDF32 /* RequestManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerMock.swift; sourceTree = "<group>"; };
+		C187170B2576D792003CDF32 /* AllPhotosServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotosServiceMock.swift; sourceTree = "<group>"; };
 		C18A66E1256D781500BFEE32 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterAnimationService.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -153,6 +180,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C13DCE45257567AF002122EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F94EF4CB4FE1DF5FC3D76741 /* Pods_TinkoffFintechTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C1CD1DAF250C02CC00568705 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,8 +203,22 @@
 			isa = PBXGroup;
 			children = (
 				C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */,
+				A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */,
+				8B04B0D3BB203355FE8EDB40 /* Pods_TinkoffFintechUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C13DCE49257567AF002122EA /* TinkoffFintechTests */ = {
+			isa = PBXGroup;
+			children = (
+				C13DCE4A257567AF002122EA /* TinkoffFintechTests.swift */,
+				C13DCE4C257567AF002122EA /* Info.plist */,
+				C13DCE5425756B94002122EA /* SaveToFileManagerMock.swift */,
+				C18717072576D117003CDF32 /* RequestManagerMock.swift */,
+				C187170B2576D792003CDF32 /* AllPhotosServiceMock.swift */,
+			);
+			path = TinkoffFintechTests;
 			sourceTree = "<group>";
 		};
 		C178CD7C25226F050007CB77 /* Conversation */ = {
@@ -549,6 +598,7 @@
 			isa = PBXGroup;
 			children = (
 				C1CD1DB4250C02CC00568705 /* TinkoffFintech */,
+				C13DCE49257567AF002122EA /* TinkoffFintechTests */,
 				C1CD1DB3250C02CC00568705 /* Products */,
 				D1E68D3D7D72E4A6A90D3B0C /* Pods */,
 				38C40EEB26C815C589E3BBA0 /* Frameworks */,
@@ -559,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				C1CD1DB2250C02CC00568705 /* TinkoffFintech.app */,
+				C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -582,6 +633,10 @@
 			children = (
 				8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */,
 				CF2E8AA83672EDDA7FC14BCF /* Pods-TinkoffFintech.release.xcconfig */,
+				92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */,
+				9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */,
+				BD60440FB1227A0D5311251D /* Pods-TinkoffFintechUITests.debug.xcconfig */,
+				1E3DD598DC41F4B169FD34FA /* Pods-TinkoffFintechUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -589,6 +644,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C13DCE47257567AF002122EA /* TinkoffFintechTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C13DCE51257567AF002122EA /* Build configuration list for PBXNativeTarget "TinkoffFintechTests" */;
+			buildPhases = (
+				F1E869568814CC30597DFA5D /* [CP] Check Pods Manifest.lock */,
+				C13DCE44257567AF002122EA /* Sources */,
+				C13DCE45257567AF002122EA /* Frameworks */,
+				C13DCE46257567AF002122EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C13DCE4E257567AF002122EA /* PBXTargetDependency */,
+			);
+			name = TinkoffFintechTests;
+			productName = TinkoffFintechTests;
+			productReference = C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C1CD1DB1250C02CC00568705 /* TinkoffFintech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C1CD1DC6250C02CF00568705 /* Build configuration list for PBXNativeTarget "TinkoffFintech" */;
@@ -615,10 +689,14 @@
 		C1CD1DAA250C02CC00568705 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1170;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = "Anna Vondrukhova";
 				TargetAttributes = {
+					C13DCE47257567AF002122EA = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = C1CD1DB1250C02CC00568705;
+					};
 					C1CD1DB1250C02CC00568705 = {
 						CreatedOnToolsVersion = 11.7;
 					};
@@ -638,11 +716,19 @@
 			projectRoot = "";
 			targets = (
 				C1CD1DB1250C02CC00568705 /* TinkoffFintech */,
+				C13DCE47257567AF002122EA /* TinkoffFintechTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C13DCE46257567AF002122EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C1CD1DB0250C02CC00568705 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -717,9 +803,42 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		F1E869568814CC30597DFA5D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintechTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C13DCE44257567AF002122EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C18717082576D117003CDF32 /* RequestManagerMock.swift in Sources */,
+				C13DCE4B257567AF002122EA /* TinkoffFintechTests.swift in Sources */,
+				C187170C2576D792003CDF32 /* AllPhotosServiceMock.swift in Sources */,
+				C13DCE5525756B94002122EA /* SaveToFileManagerMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C1CD1DAE250C02CC00568705 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -788,6 +907,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C13DCE4E257567AF002122EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1CD1DB1250C02CC00568705 /* TinkoffFintech */;
+			targetProxy = C13DCE4D257567AF002122EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		C1CD1DC0250C02CF00568705 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -800,6 +927,82 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C13DCE4F257567AF002122EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LV8EDW43XJ;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
+				);
+				INFOPLIST_FILE = TinkoffFintechTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffFintechTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinkoffFintech.app/TinkoffFintech";
+			};
+			name = Debug;
+		};
+		C13DCE50257567AF002122EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LV8EDW43XJ;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
+				);
+				INFOPLIST_FILE = TinkoffFintechTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffFintechTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinkoffFintech.app/TinkoffFintech";
+			};
+			name = Release;
+		};
 		C1CD1DC4250C02CF00568705 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -955,6 +1158,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C13DCE51257567AF002122EA /* Build configuration list for PBXNativeTarget "TinkoffFintechTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C13DCE4F257567AF002122EA /* Debug */,
+				C13DCE50257567AF002122EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C1CD1DAD250C02CC00568705 /* Build configuration list for PBXProject "TinkoffFintech" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

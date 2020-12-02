@@ -109,7 +109,7 @@ class ProfileView: UIView {
                                             saveWithGCDButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 56),
                                             saveWithGCDButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                                             saveWithGCDButton.heightAnchor.constraint(equalToConstant: 40)]
-        let saveWithOperationButtonConstraints =  [saveWithOperationButton.topAnchor.constraint(equalTo: saveWithGCDButton.bottomAnchor, constant: 10),
+        let saveWithOperationButtonConstraints = [saveWithOperationButton.topAnchor.constraint(equalTo: saveWithGCDButton.bottomAnchor, constant: 10),
                                                    saveWithOperationButton.leadingAnchor.constraint(equalTo: saveWithGCDButton.leadingAnchor),
                                                    saveWithOperationButton.centerXAnchor.constraint(equalTo: saveWithGCDButton.centerXAnchor),
                                                    saveWithOperationButton.heightAnchor.constraint(equalToConstant: 40),

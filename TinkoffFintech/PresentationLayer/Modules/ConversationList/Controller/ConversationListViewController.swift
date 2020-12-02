@@ -96,6 +96,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         userAvatarViewSnaphot = userAvatarView.snapshotView(afterScreenUpdates: true)
         
         let profileRightBarButton = UIBarButtonItem(customView: userButton)
+        profileRightBarButton.accessibilityIdentifier = "profileButton"
         let addChannelRightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChannelBarButtonPressed))
         
         let settingsLeftBarBurron = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(settingsLeftBarButtonPressed))
@@ -121,7 +122,7 @@ class ConversationListViewController: UIViewController, ThemesPickerDelegate, Al
         touchDown.delegate = self
         
         tableView.addGestureRecognizer(pan)
-        tableView.addGestureRecognizer(touchDown)
+        tableView.addGestureRecognizer(touchDown)        
     }
     
     @objc func settingsLeftBarButtonPressed(_ sender: Any) {
