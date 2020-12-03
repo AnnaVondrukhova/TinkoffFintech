@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23615CC3A71E503C5DE8101F /* Pods_TinkoffFintechTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1FFB2D2153E33A23BE35A2 /* Pods_TinkoffFintechTests.framework */; };
+		4AC6809AADABFE4870C2940F /* Pods_TinkoffFintech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69458790608810A546867D84 /* Pods_TinkoffFintech.framework */; };
 		C13DCE4B257567AF002122EA /* TinkoffFintechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13DCE4A257567AF002122EA /* TinkoffFintechTests.swift */; };
 		C13DCE5525756B94002122EA /* SaveToFileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13DCE5425756B94002122EA /* SaveToFileManagerMock.swift */; };
 		C14F87952569888100993992 /* TinkoffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F87942569888100993992 /* TinkoffCell.swift */; };
@@ -52,6 +54,7 @@
 		C18099CF25626EAC00EB58BA /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18099CE25626EAC00EB58BA /* ImageCellModel.swift */; };
 		C18717082576D117003CDF32 /* RequestManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18717072576D117003CDF32 /* RequestManagerMock.swift */; };
 		C187170C2576D792003CDF32 /* AllPhotosServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187170B2576D792003CDF32 /* AllPhotosServiceMock.swift */; };
+		C18717C025781BEF003CDF32 /* TinkoffFintechUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18717BF25781BEF003CDF32 /* TinkoffFintechUITests.swift */; };
 		C18A66E2256D781500BFEE32 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E1256D781500BFEE32 /* Animator.swift */; };
 		C18A66E6256D84DD00BFEE32 /* EmitterAnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */; };
 		C1969613251947E30077BDE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1969612251947E30077BDE8 /* User.swift */; };
@@ -78,8 +81,7 @@
 		C1FA15D3253B151F00CE86E7 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15D2253B151F00CE86E7 /* CustomTextField.swift */; };
 		C1FA15DD25486A1400CE86E7 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */; };
 		C1FA15DF25486BE700CE86E7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FA15DE25486BE700CE86E7 /* CoreDataManager.swift */; };
-		F3958D301D7ACA676178EA57 /* Pods_TinkoffFintech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */; };
-		F94EF4CB4FE1DF5FC3D76741 /* Pods_TinkoffFintechTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */; };
+		FEFFD4E81132AE0826157BF7 /* Pods_TinkoffFintechUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD628D4459E19F112A858843 /* Pods_TinkoffFintechUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,16 +92,22 @@
 			remoteGlobalIDString = C1CD1DB1250C02CC00568705;
 			remoteInfo = TinkoffFintech;
 		};
+		C18717C225781BEF003CDF32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C1CD1DAA250C02CC00568705 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1CD1DB1250C02CC00568705;
+			remoteInfo = TinkoffFintech;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E3DD598DC41F4B169FD34FA /* Pods-TinkoffFintechUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.release.xcconfig"; sourceTree = "<group>"; };
-		8B04B0D3BB203355FE8EDB40 /* Pods_TinkoffFintechUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.debug.xcconfig"; sourceTree = "<group>"; };
-		92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.release.xcconfig"; sourceTree = "<group>"; };
-		A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD60440FB1227A0D5311251D /* Pods-TinkoffFintechUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		33B18840E27C007649F0AB6B /* Pods-TinkoffFintechUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3A1FFB2D2153E33A23BE35A2 /* Pods_TinkoffFintechTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69458790608810A546867D84 /* Pods_TinkoffFintech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C11C0AC2D4D995E480532A1 /* Pods-TinkoffFintechTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BCF4872674E6509E11FCA65F /* Pods-TinkoffFintechTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechTests.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechTests/Pods-TinkoffFintechTests.release.xcconfig"; sourceTree = "<group>"; };
+		BEFCAB5284411260B6E8BE8C /* Pods-TinkoffFintechUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintechUITests.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffFintechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C13DCE4A257567AF002122EA /* TinkoffFintechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffFintechTests.swift; sourceTree = "<group>"; };
 		C13DCE4C257567AF002122EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,6 +155,9 @@
 		C18099CE25626EAC00EB58BA /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
 		C18717072576D117003CDF32 /* RequestManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerMock.swift; sourceTree = "<group>"; };
 		C187170B2576D792003CDF32 /* AllPhotosServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotosServiceMock.swift; sourceTree = "<group>"; };
+		C18717BD25781BEF003CDF32 /* TinkoffFintechUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffFintechUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18717BF25781BEF003CDF32 /* TinkoffFintechUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffFintechUITests.swift; sourceTree = "<group>"; };
+		C18717C125781BEF003CDF32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C18A66E1256D781500BFEE32 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		C18A66E5256D84DD00BFEE32 /* EmitterAnimationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterAnimationService.swift; sourceTree = "<group>"; };
 		C1969612251947E30077BDE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -175,8 +186,9 @@
 		C1FA15D2253B151F00CE86E7 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C1FA15DC25486A1400CE86E7 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		C1FA15DE25486BE700CE86E7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF2E8AA83672EDDA7FC14BCF /* Pods-TinkoffFintech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.release.xcconfig"; sourceTree = "<group>"; };
+		C2EBA8A51247DA37748A0FB6 /* Pods-TinkoffFintech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.release.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.release.xcconfig"; sourceTree = "<group>"; };
+		CD628D4459E19F112A858843 /* Pods_TinkoffFintechUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffFintechUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F77B3E1BEF18FCCBDF33CA /* Pods-TinkoffFintech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffFintech.debug.xcconfig"; path = "Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +196,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F94EF4CB4FE1DF5FC3D76741 /* Pods_TinkoffFintechTests.framework in Frameworks */,
+				23615CC3A71E503C5DE8101F /* Pods_TinkoffFintechTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18717BA25781BEF003CDF32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEFFD4E81132AE0826157BF7 /* Pods_TinkoffFintechUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,23 +212,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3958D301D7ACA676178EA57 /* Pods_TinkoffFintech.framework in Frameworks */,
+				4AC6809AADABFE4870C2940F /* Pods_TinkoffFintech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		38C40EEB26C815C589E3BBA0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C549AE28D92C62E82590EA63 /* Pods_TinkoffFintech.framework */,
-				A6B07457C4A0758D897B7BFF /* Pods_TinkoffFintechTests.framework */,
-				8B04B0D3BB203355FE8EDB40 /* Pods_TinkoffFintechUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C13DCE49257567AF002122EA /* TinkoffFintechTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +480,15 @@
 			path = PhotosService;
 			sourceTree = "<group>";
 		};
+		C18717BE25781BEF003CDF32 /* TinkoffFintechUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C18717BF25781BEF003CDF32 /* TinkoffFintechUITests.swift */,
+				C18717C125781BEF003CDF32 /* Info.plist */,
+			);
+			path = TinkoffFintechUITests;
+			sourceTree = "<group>";
+		};
 		C196961625194F050077BDE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,9 +618,10 @@
 			children = (
 				C1CD1DB4250C02CC00568705 /* TinkoffFintech */,
 				C13DCE49257567AF002122EA /* TinkoffFintechTests */,
+				C18717BE25781BEF003CDF32 /* TinkoffFintechUITests */,
 				C1CD1DB3250C02CC00568705 /* Products */,
 				D1E68D3D7D72E4A6A90D3B0C /* Pods */,
-				38C40EEB26C815C589E3BBA0 /* Frameworks */,
+				C98748D601F8EDFDDDDF9B19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -610,6 +630,7 @@
 			children = (
 				C1CD1DB2250C02CC00568705 /* TinkoffFintech.app */,
 				C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */,
+				C18717BD25781BEF003CDF32 /* TinkoffFintechUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -628,15 +649,25 @@
 			path = TinkoffFintech;
 			sourceTree = "<group>";
 		};
+		C98748D601F8EDFDDDDF9B19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69458790608810A546867D84 /* Pods_TinkoffFintech.framework */,
+				3A1FFB2D2153E33A23BE35A2 /* Pods_TinkoffFintechTests.framework */,
+				CD628D4459E19F112A858843 /* Pods_TinkoffFintechUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D1E68D3D7D72E4A6A90D3B0C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */,
-				CF2E8AA83672EDDA7FC14BCF /* Pods-TinkoffFintech.release.xcconfig */,
-				92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */,
-				9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */,
-				BD60440FB1227A0D5311251D /* Pods-TinkoffFintechUITests.debug.xcconfig */,
-				1E3DD598DC41F4B169FD34FA /* Pods-TinkoffFintechUITests.release.xcconfig */,
+				F4F77B3E1BEF18FCCBDF33CA /* Pods-TinkoffFintech.debug.xcconfig */,
+				C2EBA8A51247DA37748A0FB6 /* Pods-TinkoffFintech.release.xcconfig */,
+				6C11C0AC2D4D995E480532A1 /* Pods-TinkoffFintechTests.debug.xcconfig */,
+				BCF4872674E6509E11FCA65F /* Pods-TinkoffFintechTests.release.xcconfig */,
+				BEFCAB5284411260B6E8BE8C /* Pods-TinkoffFintechUITests.debug.xcconfig */,
+				33B18840E27C007649F0AB6B /* Pods-TinkoffFintechUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -648,7 +679,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C13DCE51257567AF002122EA /* Build configuration list for PBXNativeTarget "TinkoffFintechTests" */;
 			buildPhases = (
-				F1E869568814CC30597DFA5D /* [CP] Check Pods Manifest.lock */,
+				899F19729A3F181B0A24318E /* [CP] Check Pods Manifest.lock */,
 				C13DCE44257567AF002122EA /* Sources */,
 				C13DCE45257567AF002122EA /* Frameworks */,
 				C13DCE46257567AF002122EA /* Resources */,
@@ -663,16 +694,36 @@
 			productReference = C13DCE48257567AF002122EA /* TinkoffFintechTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C18717BC25781BEF003CDF32 /* TinkoffFintechUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C18717C425781BEF003CDF32 /* Build configuration list for PBXNativeTarget "TinkoffFintechUITests" */;
+			buildPhases = (
+				2E15F874C62A6589D2CC6E73 /* [CP] Check Pods Manifest.lock */,
+				C18717B925781BEF003CDF32 /* Sources */,
+				C18717BA25781BEF003CDF32 /* Frameworks */,
+				C18717BB25781BEF003CDF32 /* Resources */,
+				06FD0789A747BFFEF79E2EAD /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C18717C325781BEF003CDF32 /* PBXTargetDependency */,
+			);
+			name = TinkoffFintechUITests;
+			productName = TinkoffFintechUITests;
+			productReference = C18717BD25781BEF003CDF32 /* TinkoffFintechUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C1CD1DB1250C02CC00568705 /* TinkoffFintech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C1CD1DC6250C02CF00568705 /* Build configuration list for PBXNativeTarget "TinkoffFintech" */;
 			buildPhases = (
-				52EB6FA898E572850748EA26 /* [CP] Check Pods Manifest.lock */,
+				E50339EBB640D6AD27882483 /* [CP] Check Pods Manifest.lock */,
 				C1CD1DAE250C02CC00568705 /* Sources */,
 				C1CD1DAF250C02CC00568705 /* Frameworks */,
 				C1CD1DB0250C02CC00568705 /* Resources */,
 				C1FA15CD2539B62F00CE86E7 /* ShellScript */,
-				2C433613BC2092F275E354EB /* [CP] Embed Pods Frameworks */,
+				7958ED800AACB774B501A7D6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -697,6 +748,10 @@
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = C1CD1DB1250C02CC00568705;
 					};
+					C18717BC25781BEF003CDF32 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = C1CD1DB1250C02CC00568705;
+					};
 					C1CD1DB1250C02CC00568705 = {
 						CreatedOnToolsVersion = 11.7;
 					};
@@ -717,12 +772,20 @@
 			targets = (
 				C1CD1DB1250C02CC00568705 /* TinkoffFintech */,
 				C13DCE47257567AF002122EA /* TinkoffFintechTests */,
+				C18717BC25781BEF003CDF32 /* TinkoffFintechUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C13DCE46257567AF002122EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18717BB25781BEF003CDF32 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -747,7 +810,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2C433613BC2092F275E354EB /* [CP] Embed Pods Frameworks */ = {
+		06FD0789A747BFFEF79E2EAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TinkoffFintechUITests/Pods-TinkoffFintechUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E15F874C62A6589D2CC6E73 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintechUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7958ED800AACB774B501A7D6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -764,7 +866,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		52EB6FA898E572850748EA26 /* [CP] Check Pods Manifest.lock */ = {
+		899F19729A3F181B0A24318E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -779,7 +881,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintech-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintechTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -803,7 +905,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		F1E869568814CC30597DFA5D /* [CP] Check Pods Manifest.lock */ = {
+		E50339EBB640D6AD27882483 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -818,7 +920,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintechTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TinkoffFintech-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -836,6 +938,14 @@
 				C13DCE4B257567AF002122EA /* TinkoffFintechTests.swift in Sources */,
 				C187170C2576D792003CDF32 /* AllPhotosServiceMock.swift in Sources */,
 				C13DCE5525756B94002122EA /* SaveToFileManagerMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18717B925781BEF003CDF32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C18717C025781BEF003CDF32 /* TinkoffFintechUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,6 +1023,11 @@
 			target = C1CD1DB1250C02CC00568705 /* TinkoffFintech */;
 			targetProxy = C13DCE4D257567AF002122EA /* PBXContainerItemProxy */;
 		};
+		C18717C325781BEF003CDF32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1CD1DB1250C02CC00568705 /* TinkoffFintech */;
+			targetProxy = C18717C225781BEF003CDF32 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -929,7 +1044,7 @@
 /* Begin XCBuildConfiguration section */
 		C13DCE4F257567AF002122EA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92807B4DDC23CBD50113A825 /* Pods-TinkoffFintechTests.debug.xcconfig */;
+			baseConfigurationReference = 6C11C0AC2D4D995E480532A1 /* Pods-TinkoffFintechTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -967,7 +1082,7 @@
 		};
 		C13DCE50257567AF002122EA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CF8DCC9F9BBCB31F1160DD6 /* Pods-TinkoffFintechTests.release.xcconfig */;
+			baseConfigurationReference = BCF4872674E6509E11FCA65F /* Pods-TinkoffFintechTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -1000,6 +1115,50 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinkoffFintech.app/TinkoffFintech";
+			};
+			name = Release;
+		};
+		C18717C525781BEF003CDF32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEFCAB5284411260B6E8BE8C /* Pods-TinkoffFintechUITests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LV8EDW43XJ;
+				INFOPLIST_FILE = TinkoffFintechUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffFintechUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TinkoffFintech;
+			};
+			name = Debug;
+		};
+		C18717C625781BEF003CDF32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33B18840E27C007649F0AB6B /* Pods-TinkoffFintechUITests.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LV8EDW43XJ;
+				INFOPLIST_FILE = TinkoffFintechUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffFintechUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TinkoffFintech;
 			};
 			name = Release;
 		};
@@ -1119,7 +1278,7 @@
 		};
 		C1CD1DC7250C02CF00568705 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DCB0DA080AFCAC6803886B7 /* Pods-TinkoffFintech.debug.xcconfig */;
+			baseConfigurationReference = F4F77B3E1BEF18FCCBDF33CA /* Pods-TinkoffFintech.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1138,7 +1297,7 @@
 		};
 		C1CD1DC8250C02CF00568705 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF2E8AA83672EDDA7FC14BCF /* Pods-TinkoffFintech.release.xcconfig */;
+			baseConfigurationReference = C2EBA8A51247DA37748A0FB6 /* Pods-TinkoffFintech.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1163,6 +1322,15 @@
 			buildConfigurations = (
 				C13DCE4F257567AF002122EA /* Debug */,
 				C13DCE50257567AF002122EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C18717C425781BEF003CDF32 /* Build configuration list for PBXNativeTarget "TinkoffFintechUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C18717C525781BEF003CDF32 /* Debug */,
+				C18717C625781BEF003CDF32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

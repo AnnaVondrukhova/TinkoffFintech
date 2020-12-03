@@ -15,6 +15,7 @@ end
 
 target 'TinkoffFintechUITests' do
   inherit! :search_paths
+  pod 'Firebase/Firestore'
 end
 
 end
