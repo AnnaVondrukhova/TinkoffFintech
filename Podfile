@@ -8,6 +8,16 @@ target 'TinkoffFintech' do
   # Pods for TinkoffFintech
 pod 'Firebase/Firestore'
 pod 'SwiftLint'
+
+target 'TinkoffFintechTests' do
+  inherit! :search_paths
+end
+
+target 'TinkoffFintechUITests' do
+  inherit! :search_paths
+  pod 'Firebase/Firestore'
+end
+
 end
 
 post_install do |installer|
