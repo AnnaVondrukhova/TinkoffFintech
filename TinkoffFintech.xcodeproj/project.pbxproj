@@ -169,6 +169,7 @@
 		C19A384B252736A600642E58 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		C19A384E252737B700642E58 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C19A3851252738E200642E58 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
+		C1C2C6B1257EB4730097DCB3 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		C1CD1DB2250C02CC00568705 /* TinkoffFintech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffFintech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CD1DB5250C02CC00568705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1CD1DB9250C02CC00568705 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +498,7 @@
 				C1CD1DC3250C02CF00568705 /* Info.plist */,
 				C1FA15CE2539C15D00CE86E7 /* GoogleService-Info.plist */,
 				C1FA15DB25486A1400CE86E7 /* Chat.xcdatamodeld */,
+				C1C2C6B1257EB4730097DCB3 /* Config.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1278,7 +1280,7 @@
 		};
 		C1CD1DC7250C02CF00568705 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4F77B3E1BEF18FCCBDF33CA /* Pods-TinkoffFintech.debug.xcconfig */;
+			baseConfigurationReference = C1C2C6B1257EB4730097DCB3 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
