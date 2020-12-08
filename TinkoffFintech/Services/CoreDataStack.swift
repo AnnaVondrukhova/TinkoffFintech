@@ -48,7 +48,7 @@ class CoreDataStack {
         return context
     }()
     
-    private lazy var mainContext: NSManagedObjectContext = {
+    lazy var mainContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.parent = self.writeToDBContext
         context.automaticallyMergesChangesFromParent = true
@@ -70,6 +70,7 @@ class CoreDataStack {
             block(context)
             if context.hasChanges {
                 do {
+                    try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                     try performSave(in: context)
                 } catch {
                     assertionFailure(error.localizedDescription)
@@ -93,10 +94,13 @@ class CoreDataStack {
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(contextObjectsDidChange(notification:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: mainContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(contextObjectsDidChange(notification:)),
+                                               name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+                                               object: mainContext)
     }
     
     @objc private func contextObjectsDidChange(notification: NSNotification) {
+//        print("Context object did change")
         guard let userInfo = notification.userInfo else {return}
         
         if let insertedObjects = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
@@ -142,7 +146,7 @@ class CoreDataStack {
         mainContext.perform {
             do {
                 let channels = try self.mainContext.fetch(request)
-                print ("\nDatabase contains \(channels.count) channels\n")
+                print("\nDatabase contains \(channels.count) channels\n")
                 channels.forEach { (channel) in
                     print("+++Channel details: \(channel.name)")
                 }

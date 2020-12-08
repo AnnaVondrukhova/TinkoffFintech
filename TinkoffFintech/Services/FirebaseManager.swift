@@ -15,61 +15,86 @@ class FirebaseManager {
     func getChannels(completion: @escaping ([Channel], [Channel], [String]) -> Void) {
         let reference = db.collection("channels")
         
+        reference.addSnapshotListener { (snapshot, _) in
+            guard let snapshot = snapshot else { return }
+            
+            var addedChannels = [Channel]()
+            var modifiedChannels = [Channel]()
+            var removedChannels = [String]()
+            
+            snapshot.documentChanges.forEach { (diff) in
+                if diff.type == .added {
+                    let channelIdentifier = diff.document.documentID
+                    let channelDict = diff.document.data()
+                    if let channel = Channel(identifier: channelIdentifier, dict: channelDict) {
+                        addedChannels.append(channel)
+                    }
+                    
+                }
+                if diff.type == .modified {
+                    let channelIdentifier = diff.document.documentID
+                    let channelDict = diff.document.data()
+                    if let channel = Channel(identifier: channelIdentifier, dict: channelDict) {
+                        modifiedChannels.append(channel)
+                    }
+                }
+                if diff.type == .removed {
+                    removedChannels.append(diff.document.documentID)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completion(addedChannels, modifiedChannels, removedChannels)
+            }
+        }
+    }
+    
+    func addChannel(name: String, completion: @escaping (Error?) -> Void) {
+        print("Started Firebase addChannel")
+        let reference = db.collection("channels")
         
         let firebaseQueue = DispatchQueue.global()
         firebaseQueue.async {
-            reference.addSnapshotListener { (snapshot, _) in
-                guard let snapshot = snapshot else { return }
-                
-                var addedChannels = [Channel]()
-                var modifiedChannels = [Channel]()
-                var removedChannels = [String]()
-                
-                snapshot.documentChanges.forEach { (diff) in
-                    if (diff.type == .added) {
-                        let channelIdentifier = diff.document.documentID
-                        let channelDict = diff.document.data()
-                        if let channel = Channel(identifier: channelIdentifier, dict: channelDict) {
-                            addedChannels.append(channel)
-                        }
-                        
+            reference.addDocument(data: ["name": name]) {error in
+                if let error = error {
+                    print("Error adding channel")
+                    DispatchQueue.main.async {
+                        completion(error)
                     }
-                    if (diff.type == .modified) {
-                        let channelIdentifier = diff.document.documentID
-                        let channelDict = diff.document.data()
-                        if let channel = Channel(identifier: channelIdentifier, dict: channelDict) {
-                            modifiedChannels.append(channel)
-                        }
+                } else {
+                    print("Successfully added channel")
+                    DispatchQueue.main.async {
+                        completion(nil)
                     }
-                    if (diff.type == .removed) {
-                        removedChannels.append(diff.document.documentID)
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    completion(addedChannels, modifiedChannels, removedChannels)
                 }
             }
         }
     }
     
-    func addChannel(name: String, completion: @escaping (String?, Error?) -> Void) {
-        let reference = db.collection("channels")
-        
+    func deleteChannel(channelId: String) {
         let firebaseQueue = DispatchQueue.global()
         firebaseQueue.async {
-            var channelRef: DocumentReference? = nil
-            channelRef = reference.addDocument(data: ["name": name]) {error in
+            let messageReference = self.db.collection("channels").document(channelId).collection("messages")
+            messageReference.getDocuments { (snapshot, _) in
+                guard let snapshot = snapshot else { return }
+                
+                snapshot.documents.forEach { (message) in
+                    messageReference.document(message.documentID).delete { (error) in
+                    if let error = error {
+                        print("Error deleting message: \(error)")
+                    } else {
+                        print("Successfully deleted message")
+                    }
+                    }
+                }
+            }
+            
+            let channelReference = self.db.collection("channels")
+            channelReference.document(channelId).delete { (error) in
                 if let error = error {
-                    print ("Error adding channel")
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
+                    print("Error deleting channel: \(error)")
                 } else {
-                    print("Successfully added channel")
-                    DispatchQueue.main.async {
-                        completion(channelRef?.documentID, nil)
-                    }
+                    print("Successfully deleted channel")
                 }
             }
         }
@@ -78,24 +103,21 @@ class FirebaseManager {
     func getMessages(with channelId: String, completion: @escaping([Message]) -> Void) {
         let reference = db.collection("channels").document(channelId).collection("messages")
         
-        let firebaseQueue = DispatchQueue.global()
-        firebaseQueue.async {
-            reference.addSnapshotListener { (snapshot, _) in
-                guard let snapshot = snapshot else { return }
-                var messages = [Message]()
+        reference.addSnapshotListener { (snapshot, _) in
+            guard let snapshot = snapshot else { return }
+            var messages = [Message]()
 
-                snapshot.documentChanges.forEach { (diff) in
-                    if (diff.type == .added) {
-                        let messageDict = diff.document.data()
-                        if let message = Message(identifier: diff.document.documentID, dict: messageDict) {
-                            messages.append(message)
-                        }
+            snapshot.documentChanges.forEach { (diff) in
+                if diff.type == .added {
+                    let messageDict = diff.document.data()
+                    if let message = Message(identifier: diff.document.documentID, dict: messageDict) {
+                        messages.append(message)
                     }
                 }
-                
-                DispatchQueue.main.async {
-                    completion(messages)
-                }
+            }
+            
+            DispatchQueue.main.async {
+                completion(messages)
             }
         }
     }
