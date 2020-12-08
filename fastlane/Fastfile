@@ -36,5 +36,16 @@ platform :ios do
   lane :build_and_test do
     build_for_testing
     run_tests
+
+    DISCORD_WEBHOOK_URL = ENV['DISCORD_WEBHOOK']
+
+  
+    discord(
+      url: DISCORD_WEBHOOK_URL ,
+      app_name: 'TinkoffChat',
+      platform: 'ios',
+      version: VERSION,
+      build_number: BUILD_NUMBER
+    )
   end
 end
