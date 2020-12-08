@@ -43,9 +43,7 @@ platform :ios do
     discord(
       url: DISCORD_WEBHOOK_URL ,
       app_name: 'TinkoffChat',
-      platform: 'ios',
-      version: VERSION,
-      build_number: BUILD_NUMBER
+      platform: 'ios'
     )
   end
 end
