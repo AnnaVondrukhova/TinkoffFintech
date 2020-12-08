@@ -6,4 +6,5 @@ install:
  - pod install
  - bundle install
 script:
+ - fastlane add_plugin discord
  - fastlane build_and_test
