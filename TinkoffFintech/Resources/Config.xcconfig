@@ -1,0 +1,14 @@
+//
+//  Config.xcconfig
+//  TinkoffFintech
+//
+//  Created by Anya on 07.12.2020.
+//  Copyright © 2020 Anna Vondrukhova. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-TinkoffFintech/Pods-TinkoffFintech.debug.xcconfig"
+
+API_KEY = 19099745-2e27ab96f19dd46a70f143587

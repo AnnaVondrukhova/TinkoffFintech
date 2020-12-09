@@ -1,0 +1,11 @@
+language: swift
+osx_image: xcode12.2
+before_install:
+ - gem install cocoapods
+ - gem install bundler
+install:
+ - pod install
+ - bundle install
+script:
+ - bundle exec fastlane add_plugin discord
+ - fastlane build_and_test

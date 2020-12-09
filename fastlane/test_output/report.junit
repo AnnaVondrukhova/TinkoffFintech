@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='TinkoffFintechUITests.xctest' tests='4' failures='0'>
+  <testsuite name='TinkoffFintechTests.TinkoffFintechTests' tests='3' failures='0'>
+    <testcase classname='TinkoffFintechTests.TinkoffFintechTests' name='testDataIsCashed' time='0.597'/>
+    <testcase classname='TinkoffFintechTests.TinkoffFintechTests' name='testGCDFileServiceCallsSaveToFileManager' time='2.010'/>
+    <testcase classname='TinkoffFintechTests.TinkoffFintechTests' name='testRequestManagerGetsValidURL' time='0.001'/>
+  </testsuite>
+  <testsuite name='TinkoffFintechUITests.TinkoffFintechUITests' tests='1' failures='0'>
+    <testcase classname='TinkoffFintechUITests.TinkoffFintechUITests' name='testTextFieldExistence' time='4.648'/>
+  </testsuite>
+</testsuites>
