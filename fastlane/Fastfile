@@ -44,8 +44,8 @@ platform :ios do
     url: DISCORD_WEBHOOK_URL ,
     app_name: 'TinkoffChat',
     platform: 'ios', 
-    version: 1.0,
-    build_number: 1
+    version: '1.0',
+    build_number: '1'
     )
   end
 end
