@@ -40,12 +40,10 @@ platform :ios do
     DISCORD_WEBHOOK_URL = ENV['DISCORD_WEBHOOK']
 
   
-    discord(
-      url: DISCORD_WEBHOOK_URL ,
-      app_name: 'TinkoffChat',
-      platform: 'ios',
-      version: VERSION,
-      build_number: BUILD_NUMBER
+    discord_notifier(
+    webhook_url:DISCORD_WEBHOOK_URL,
+    title: "TinkoffChat",
+    description: "Success"  
     )
   end
 end
